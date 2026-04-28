@@ -1,0 +1,244 @@
+:root {
+  --bg: #fafafa;
+  --orange: #f2994a;
+  --green: #219653;
+  --gray-1: #333333;
+  --gray-4: #bdbdbd;
+  --gray-5: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+}
+
+body {
+  color: #000;
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+}
+
+.page {
+  position: relative;
+  width: 798px;
+  min-height: 1318px;
+  margin: 0 auto;
+  padding-top: 56px;
+  background: var(--bg);
+  --grid-gap: 40px;
+}
+
+.name-rail {
+  position: fixed;
+  left: -12px;
+  top: -12px;
+  transform: none;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  color: #b6b6b6;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 15.36px;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.intro-grid,
+.work-grid,
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(19, minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+  width: 100%;
+  margin-left: 0;
+  padding: 0 40px;
+}
+
+.intro-grid > :first-child,
+.work-grid > :first-child,
+.experience-grid > :first-child {
+  grid-column: 1 / span 6;
+}
+
+.intro-grid > :last-child,
+.work-grid > :last-child,
+.experience-grid > :last-child {
+  grid-column: 9 / -1;
+}
+
+.intro-grid h1 {
+  margin: 0;
+  text-align: right;
+}
+
+.intro-grid p {
+  margin: 0;
+}
+
+.work-grid {
+  margin-top: 100px;
+  align-items: start;
+}
+
+.section-label {
+  margin: 0;
+  text-align: right;
+}
+
+.section-label.work {
+  color: var(--orange);
+}
+
+.section-label.exp {
+  color: var(--green);
+}
+
+.work-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.work-card .thumb {
+  height: 200px;
+  width: 100%;
+  border-radius: 2px;
+  background: var(--gray-5);
+}
+
+.work-card h2 {
+  margin: 16px 0 16px;
+}
+
+.work-card .desc {
+  margin: 0;
+}
+
+.work-card .meta {
+  margin: 12px 0 16px;
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+
+.work-card .link {
+  margin: 0;
+}
+
+.experience-grid {
+  margin-top: 220px;
+  align-items: start;
+}
+
+.experience-list {
+  width: 237px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.experience-item p {
+  margin: 0;
+}
+
+.experience-item p:first-child {
+  color: #000;
+}
+
+.experience-item p:first-child span {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.experience-item .period {
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+}
+
+.footer {
+  margin: 260px auto 11px;
+  width: 446px;
+  border-top: 1px solid var(--gray-5);
+  padding: 32px 0;
+}
+
+.footer nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footer nav a {
+  color: var(--gray-1);
+  text-decoration: underline;
+}
+
+.footer p {
+  margin: 40px 0 0;
+  color: var(--gray-4);
+  letter-spacing: 0.4px;
+  text-align: center;
+}
+
+.h1 {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.h2 {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.h3 {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.h4 {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.regular {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.caption {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.button {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
