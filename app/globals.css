@@ -73,23 +73,27 @@ body {
   grid-column: 9 / -1;
 }
 
-.intro-grid h1 {
-  margin: 0;
-  text-align: right;
+.intro-grid > p:first-child {
+  align-self: start;
 }
 
-.intro-grid p {
+.intro-grid > p:last-child {
   margin: 0;
 }
 
 .work-grid {
-  margin-top: 100px;
+  margin-top: 56px;
   align-items: start;
 }
 
 .section-label {
   margin: 0;
   text-align: right;
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
 }
 
 .section-label.work {
@@ -103,36 +107,25 @@ body {
 .work-list {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-}
-
-.work-card .thumb {
-  height: 200px;
-  width: 100%;
-  border-radius: 2px;
-  background: var(--gray-5);
+  gap: 48px;
 }
 
 .work-card h2 {
-  margin: 16px 0 16px;
+  margin: 0 0 16px;
 }
 
 .work-card .desc {
-  margin: 0;
+  margin: 0 0 16px;
 }
 
 .work-card .meta {
-  margin: 12px 0 16px;
+  margin: 0;
   color: rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
 }
 
-.work-card .link {
-  margin: 0;
-}
-
 .experience-grid {
-  margin-top: 220px;
+  margin-top: 56px;
   align-items: start;
 }
 
@@ -162,10 +155,10 @@ body {
 }
 
 .footer {
-  margin: 260px auto 11px;
+  margin: 133px auto 0;
+  padding: 32px 0 32px;
   width: 446px;
   border-top: 1px solid var(--gray-5);
-  padding: 32px 0;
 }
 
 .footer nav {
@@ -225,6 +218,15 @@ body {
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0;
+}
+
+.regular-sm {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: #222;
 }
 
 .caption {
