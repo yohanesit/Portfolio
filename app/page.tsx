@@ -39,7 +39,7 @@ export default function Home() {
 
       <section className="intro-grid">
         <p className="section-label h3">HELLO THERE!</p>
-        <p className="regular">
+        <p className="regular-sm">
           I&apos;m a product designer based in Jakarta, Indonesia. For 8+ years, I&apos;ve been
           designing digital experiences ranging from small startups to enterprise software. I focus
           my design process on turning complex business requirements into delightful, crafted
@@ -65,7 +65,7 @@ export default function Home() {
         <div className="experience-list">
           {experiences.map((item) => (
             <article className="experience-item" key={item.role}>
-              <p className="button">
+              <p className="h3">
                 {item.role.toUpperCase()} <span>// {item.company.toUpperCase()}</span>
               </p>
               <p className="period caption">{item.period}</p>
