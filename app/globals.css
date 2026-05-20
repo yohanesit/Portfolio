@@ -23,13 +23,31 @@ body {
   font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
 }
 
+/* Vertical column markers (all 0.5px):
+   col 5 left  = 4×110px         = calc(33.333% + 13.333px)  — dotted
+   col 5 right = 5×70 + 4×40px   = calc(41.667% - 23.333px)  — solid
+   col 9 left  = 8×110px         = calc(66.667% + 26.667px)  — dotted
+   col 9 right = 9×70 + 8×40px   = calc(75% - 10px)          — solid  */
 .page {
   position: relative;
-  width: 798px;
-  min-height: 1318px;
+  max-width: 1280px;
+  width: 100%;
+  min-height: 1375px;
   margin: 0 auto;
-  padding-top: 56px;
-  background: var(--bg);
+  padding-top: 70px;
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(to bottom, var(--gray-5) 0, var(--gray-5) 4px, transparent 4px, transparent 8px),
+    linear-gradient(var(--gray-5), var(--gray-5)),
+    repeating-linear-gradient(to bottom, var(--gray-5) 0, var(--gray-5) 4px, transparent 4px, transparent 8px),
+    linear-gradient(var(--gray-5), var(--gray-5));
+  background-size: 0.5px 100%;
+  background-position:
+    calc(33.333% + 13.333px) 0,
+    calc(41.667% - 23.333px) 0,
+    calc(66.667% + 26.667px) 0,
+    calc(75% - 10px) 0;
+  background-repeat: no-repeat;
   --grid-gap: 40px;
 }
 
@@ -50,43 +68,36 @@ body {
   z-index: 10;
 }
 
+/* 12-column grid — label in cols 3–4, content in cols 6–9 */
 .intro-grid,
 .work-grid,
 .experience-grid {
   display: grid;
-  grid-template-columns: repeat(19, minmax(0, 1fr));
+  grid-template-columns: repeat(12, 1fr);
   column-gap: var(--grid-gap);
   width: 100%;
-  margin-left: 0;
-  padding: 0 40px;
-}
-
-.intro-grid > :first-child,
-.work-grid > :first-child,
-.experience-grid > :first-child {
-  grid-column: 1 / span 6;
-}
-
-.intro-grid > :last-child,
-.work-grid > :last-child,
-.experience-grid > :last-child {
-  grid-column: 9 / -1;
-}
-
-.intro-grid > p:first-child {
-  align-self: start;
-}
-
-.intro-grid > p:last-child {
-  margin: 0;
-}
-
-.work-grid {
-  margin-top: 56px;
+  padding: 32px 0;
   align-items: start;
+  position: relative;
+}
+
+/* Full-viewport-width horizontal separator lines */
+.intro-grid::before,
+.work-grid::before,
+.experience-grid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background: var(--gray-5);
+  pointer-events: none;
 }
 
 .section-label {
+  grid-column: 3 / span 2;
   margin: 0;
   text-align: right;
   font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
@@ -94,6 +105,26 @@ body {
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0.04em;
+  align-self: start;
+}
+
+.intro-grid > .regular-sm,
+.work-grid > .work-list,
+.experience-grid > .experience-list {
+  grid-column: 6 / span 3;
+  align-self: start;
+}
+
+.experience-grid::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background: var(--gray-5);
+  pointer-events: none;
 }
 
 .section-label.work {
@@ -107,7 +138,7 @@ body {
 .work-list {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 40px;
 }
 
 .work-card h2 {
@@ -115,7 +146,7 @@ body {
 }
 
 .work-card .desc {
-  margin: 0 0 16px;
+  margin: 0 0 8px;
 }
 
 .work-card .meta {
@@ -124,16 +155,10 @@ body {
   text-transform: uppercase;
 }
 
-.experience-grid {
-  margin-top: 56px;
-  align-items: start;
-}
-
 .experience-list {
-  width: 237px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 40px;
 }
 
 .experience-item p {
@@ -142,6 +167,7 @@ body {
 
 .experience-item p:first-child {
   color: #000;
+  line-height: 1.4;
 }
 
 .experience-item p:first-child span {
@@ -152,13 +178,20 @@ body {
   margin-top: 16px;
   color: rgba(0, 0, 0, 0.4);
   text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gap);
+  width: 100%;
 }
 
 .footer {
-  margin: 133px auto 0;
-  padding: 32px 0 32px;
-  width: 446px;
-  border-top: 1px solid var(--gray-5);
+  grid-column: 6 / span 3;
+  padding: 32px 0;
+  text-align: center;
 }
 
 .footer nav {
@@ -170,13 +203,14 @@ body {
 .footer nav a {
   color: var(--gray-1);
   text-decoration: underline;
+  font-size: 10px;
 }
 
 .footer p {
-  margin: 40px 0 0;
+  margin: 32px 0 0;
   color: var(--gray-4);
   letter-spacing: 0.4px;
-  text-align: center;
+  font-size: 10px;
 }
 
 .h1 {
@@ -199,7 +233,7 @@ body {
   font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
   font-weight: 700;
   font-size: 16px;
-  line-height: 1;
+  line-height: 1.6;
   letter-spacing: 0.04em;
 }
 
@@ -223,7 +257,7 @@ body {
 .regular-sm {
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4;
   letter-spacing: 0;
   color: #222;

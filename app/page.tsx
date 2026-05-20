@@ -74,6 +74,7 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="footer-grid">
       <footer className="footer">
         <nav>
           <a className="button" href="#">
@@ -86,12 +87,9 @@ export default function Home() {
             LINKEDIN
           </a>
         </nav>
-        <p className="caption">
-          © 2026 INTERACTION DESIGNER FROM JAKARTA INDONESIA
-          <br />
-          BUILT WITH CURSOR &amp; FIGMA
-        </p>
+        <p>© 2026 INTERACTION DESIGNER FROM JAKARTA INDONESIA</p>
       </footer>
+      </div>
     </main>
   );
 }
