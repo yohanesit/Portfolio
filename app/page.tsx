@@ -1,30 +1,37 @@
+import Link from "next/link";
+import { ClockWidget } from "./components/ClockWidget";
+
 const workItems = [
   {
     title: "FROM JAKARTA TO THE WORLD",
     desc: "A local bank navigating rapid digital challenges and rising customer expectations",
-    period: "2025-2026 • 5 Minute Read",
+    period: "5 Minute Read",
+    href: "/work/jakarta",
   },
   {
     title: "MALAYSIAN ENERGY COMPANY",
     desc: "Shaping Malaysians future relationship with their energy usage",
-    period: "2021 • 5 Minute Read",
+    period: "5 Minute Read",
+    href: null,
   },
   {
     title: "NATIONAL BANKING APP",
     desc: "A bank-wide digital transformation project for Indonesia's 4th largest bank",
-    period: "2023-2024 • 5 Minute Read",
+    period: "5 Minute Read",
+    href: null,
   },
   {
-    title: "INCREASING THAILAND'S ROAD SAFETY",
+    title: "INCREASING THAILAND ROAD SAFETY",
     desc: "Helping Thailand's motorists, ride safely, and efficiently",
-    period: "2021 • 5 Minute Read",
+    period: "5 Minute Read",
+    href: null,
   },
 ];
 
 const experiences = [
   { role: "Associate Manager", company: "Accenture Song", period: "OCTOBER 2019 - PRESENT" },
   { role: "UX Designer", company: "Bukalapak", period: "MARCH 2019 - OCTOBER 2019" },
-  { role: "Product Design", company: "GetCraft", period: "MAY 2018 - MARCH 2019" },
+  { role: "Product Designer", company: "GetCraft", period: "MAY 2018 - MARCH 2019" },
   {
     role: "Student Researcher",
     company: "The University of Texas at Austin",
@@ -35,60 +42,90 @@ const experiences = [
 export default function Home() {
   return (
     <main className="page">
-      <aside className="name-rail">YOHANES SITANGGANG</aside>
+      {/* ── Header: clock + @YOHANESIT (above first divider) ── */}
+      <div className="page-header-grid">
+        <div className="page-header-content">
+          <ClockWidget />
+          <button className="home-handle">@YOHANESIT</button>
+        </div>
+      </div>
 
+      <div className="h-divider" />
+
+      {/* ── Bio ── */}
       <section className="intro-grid">
-        <p className="section-label h3">HELLO THERE!</p>
-        <p className="regular-sm">
-          I&apos;m a product designer based in Jakarta, Indonesia. For 8+ years, I&apos;ve been
-          designing digital experiences ranging from small startups to enterprise software. I focus
-          my design process on turning complex business requirements into delightful, crafted
-          experiences for users.
-        </p>
-      </section>
-
-      <section className="work-grid">
-        <p className="section-label work h3">SELECT WORK</p>
-        <div className="work-list">
-          {workItems.map((item) => (
-            <article className="work-card" key={item.title}>
-              <h2 className="h3">{item.title}</h2>
-              <p className="desc regular-sm">{item.desc}</p>
-              <p className="meta caption">{item.period}</p>
-            </article>
-          ))}
+        <div className="intro-content">
+          <p className="bio-text">
+            Hi there! I&apos;m a UX Designer currently working for{" "}
+            <a
+              href="https://www.accenture.com/us-en/services/song-index"
+              className="bio-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Accenture Song.
+            </a>
+            <br />
+            <br />
+            For 8+ years, I&apos;ve been designing digital experiences ranging from small startups
+            to enterprise software. I focus my design process on turning complex business
+            requirements into delightful, crafted experiences for users.
+          </p>
         </div>
       </section>
 
+      {/* ── Select Work ── */}
+      <section className="work-grid">
+        <p className="section-label work">SELECT WORK</p>
+        <div className="work-list">
+          {workItems.map((item) =>
+            item.href ? (
+              <Link href={item.href} key={item.title} className="work-card work-card--link">
+                <p className="work-title">{item.title}</p>
+                <p className="work-desc">{item.desc}</p>
+                <p className="work-meta">{item.period}</p>
+              </Link>
+            ) : (
+              <article className="work-card" key={item.title}>
+                <p className="work-title">{item.title}</p>
+                <p className="work-desc">{item.desc}</p>
+                <p className="work-meta">{item.period}</p>
+              </article>
+            )
+          )}
+        </div>
+      </section>
+
+      {/* ── Experience ── */}
       <section className="experience-grid">
-        <p className="section-label exp h3">EXPERIENCE</p>
+        <p className="section-label exp">EXPERIENCE</p>
         <div className="experience-list">
           {experiences.map((item) => (
             <article className="experience-item" key={item.role}>
-              <p className="h3">
-                {item.role.toUpperCase()} <span>// {item.company.toUpperCase()}</span>
+              <p className="exp-role">
+                {item.role.toUpperCase()} //{" "}
+                <span className="company">{item.company.toUpperCase()}</span>
               </p>
-              <p className="period caption">{item.period}</p>
+              <p className="exp-period">{item.period}</p>
             </article>
           ))}
         </div>
       </section>
 
+      <div className="h-divider" />
+
+      {/* ── Footer ── */}
       <div className="footer-grid">
-      <footer className="footer">
-        <nav>
-          <a className="button" href="#">
-            RESUME
-          </a>
-          <a className="button" href="#">
-            EMAIL ME
-          </a>
-          <a className="button" href="#">
-            LINKEDIN
-          </a>
-        </nav>
-        <p>© 2026 INTERACTION DESIGNER FROM JAKARTA INDONESIA</p>
-      </footer>
+        <footer className="footer">
+          <p className="footer-credit">
+            {`©2026 MADE WITH FIGMA & CURSOR\n\nYOHANES SITANGGANG IS AN INTERACTION DESIGNER FROM JAKARTA, INDONESIA`}
+          </p>
+          <nav>
+            <a href="#">EMAIL</a>
+            <a href="#">RESUME</a>
+            <a href="#">LINKEDIN</a>
+          </nav>
+        </footer>
       </div>
     </main>
   );

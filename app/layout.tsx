@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
 const iaWriterDuospace = localFont({
@@ -17,6 +18,13 @@ const iaWriterDuospace = localFont({
   ],
   variable: "--font-ia-writer-duospace",
   display: "swap"
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
 });
 
 const valkyrieB = localFont({
@@ -47,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${iaWriterDuospace.variable} ${valkyrieB.variable}`}>
+      <html lang="en" className={`${iaWriterDuospace.variable} ${valkyrieB.variable} ${ibmPlexMono.variable}`}>
       <body>{children}</body>
     </html>
   );

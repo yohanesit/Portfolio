@@ -1,5 +1,5 @@
 :root {
-  --bg: #fafafa;
+  --bg: #f2f2f2;
   --orange: #f2994a;
   --green: #219653;
   --gray-1: #333333;
@@ -16,6 +16,7 @@ body {
   margin: 0;
   padding: 0;
   background: var(--bg);
+  overflow-x: hidden;
 }
 
 body {
@@ -23,138 +24,194 @@ body {
   font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
 }
 
-/* Vertical column markers (all 0.5px):
-   col 5 left  = 4×110px         = calc(33.333% + 13.333px)  — dotted
-   col 5 right = 5×70 + 4×40px   = calc(41.667% - 23.333px)  — solid
-   col 9 left  = 8×110px         = calc(66.667% + 26.667px)  — dotted
-   col 9 right = 9×70 + 8×40px   = calc(75% - 10px)          — solid  */
+/* ─────────────────────────────────────────────
+   HOME PAGE
+   Grid: 12 cols · 80px outer margin · 24px gutter
+   Col width at 1280px = (1280 - 160 - 264) / 12 ≈ 71.33px
+   Col 5 left  = 80 + 4 × (71.33 + 24) = 461px = calc(33.333% + 34.33px)
+   Col 9 left  = 80 + 8 × (71.33 + 24) = 843px = calc(66.667% − 10.33px)
+───────────────────────────────────────────── */
+
 .page {
   position: relative;
   max-width: 1280px;
   width: 100%;
-  min-height: 1375px;
   margin: 0 auto;
-  padding-top: 70px;
   background-color: var(--bg);
+  /* Two solid 0.5px vertical lines: col 5 start and col 9 start */
   background-image:
-    repeating-linear-gradient(to bottom, var(--gray-5) 0, var(--gray-5) 4px, transparent 4px, transparent 8px),
     linear-gradient(var(--gray-5), var(--gray-5)),
-    repeating-linear-gradient(to bottom, var(--gray-5) 0, var(--gray-5) 4px, transparent 4px, transparent 8px),
     linear-gradient(var(--gray-5), var(--gray-5));
   background-size: 0.5px 100%;
   background-position:
-    calc(33.333% + 13.333px) 0,
-    calc(41.667% - 23.333px) 0,
-    calc(66.667% + 26.667px) 0,
-    calc(75% - 10px) 0;
+    calc(33.333% + 34.33px) 0,
+    calc(66.667% - 10.33px) 0;
   background-repeat: no-repeat;
-  --grid-gap: 40px;
+  --grid-gap: 24px;
+  --grid-margin: 80px;
 }
 
-.name-rail {
-  position: fixed;
-  left: -12px;
-  top: -12px;
-  transform: none;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  white-space: nowrap;
-  color: #b6b6b6;
-  font-size: 64px;
-  font-weight: 700;
-  letter-spacing: 15.36px;
-  line-height: 1;
-  pointer-events: none;
-  z-index: 10;
+/* ── Page header: clock + @YOHANESIT, above first divider ── */
+.page-header-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gap);
+  padding: 0 var(--grid-margin);
+  height: 181px;
 }
 
-/* 12-column grid — label in cols 3–4, content in cols 6–9 */
+.page-header-content {
+  grid-column: 5 / span 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 24px;
+}
+
+/* Clock widget */
+.clock {
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 400;
+  color: #828282;
+  margin: 0;
+  line-height: 0;
+}
+
+.clock-tz {
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.clock-time {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* @YOHANESIT home button */
+.home-handle {
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0.32px;
+  color: var(--gray-1);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* ── Full-width horizontal divider ── */
+.h-divider {
+  width: 100vw;
+  height: 1px;
+  background: var(--gray-5);
+  margin-left: calc(-50vw + 50%);
+}
+
+/* ── Section grid (shared by intro, work, experience) ── */
 .intro-grid,
 .work-grid,
 .experience-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: var(--grid-gap);
-  width: 100%;
-  padding: 32px 0;
+  padding: 0 var(--grid-margin);
   align-items: start;
-  position: relative;
 }
 
-/* Full-viewport-width horizontal separator lines */
-.intro-grid::before,
-.work-grid::before,
-.experience-grid::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 1px;
-  background: var(--gray-5);
-  pointer-events: none;
-}
-
+/* Left label: cols 1–4, right-aligned */
 .section-label {
-  grid-column: 3 / span 2;
+  grid-column: 1 / span 4;
   margin: 0;
+  padding: 40px 0;
   text-align: right;
-  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
-  font-weight: 700;
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0.04em;
   align-self: start;
 }
 
-.intro-grid > .regular-sm,
+.section-label.work { color: var(--orange); }
+.section-label.exp  { color: var(--green); }
+
+/* Right content: cols 5–8 */
+.intro-grid > .intro-content,
 .work-grid > .work-list,
 .experience-grid > .experience-list {
-  grid-column: 6 / span 3;
+  grid-column: 5 / span 4;
+  padding: 40px 24px;
   align-self: start;
 }
 
-.experience-grid::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 1px;
-  background: var(--gray-5);
-  pointer-events: none;
+/* Bio intro text */
+.bio-text {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--gray-1);
+  margin: 0;
 }
 
-.section-label.work {
-  color: var(--orange);
+.bio-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-.section-label.exp {
-  color: var(--green);
-}
-
+/* ── Work section ── */
 .work-list {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
 
-.work-card h2 {
+.work-card--link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.work-card--link:hover .work-title {
+  text-decoration: underline;
+}
+
+.work-title {
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.032px;
+  color: var(--gray-1);
+  text-transform: uppercase;
   margin: 0 0 16px;
 }
 
-.work-card .desc {
-  margin: 0 0 8px;
+.work-desc {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--gray-1);
+  margin: 0 0 16px;
 }
 
-.work-card .meta {
-  margin: 0;
+.work-meta {
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
   color: rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
+  margin: 0;
 }
 
+/* ── Experience section ── */
 .experience-list {
   display: flex;
   flex-direction: column;
@@ -165,102 +222,105 @@ body {
   margin: 0;
 }
 
-.experience-item p:first-child {
-  color: #000;
-  line-height: 1.4;
+.exp-role {
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--gray-1);
+  text-transform: uppercase;
+  letter-spacing: -0.32px;
+  margin: 0 0 16px;
 }
 
-.experience-item p:first-child span {
-  color: rgba(0, 0, 0, 0.4);
+.exp-role .company {
+  color: var(--gray-4);
 }
 
-.experience-item .period {
-  margin-top: 16px;
+.exp-period {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: normal;
   color: rgba(0, 0, 0, 0.4);
   text-transform: uppercase;
   letter-spacing: 2px;
+  margin: 0;
 }
 
+/* ── Footer ── */
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: var(--grid-gap);
   width: 100%;
+  padding: 0 var(--grid-margin);
 }
 
 .footer {
-  grid-column: 6 / span 3;
-  padding: 32px 0;
-  text-align: center;
+  grid-column: 5 / span 4;
+  padding: 24px 24px 105px;
+  text-align: left;
+}
+
+.footer-credit {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.48px;
+  color: var(--gray-4);
+  margin: 0 0 40px;
+  white-space: pre-wrap;
 }
 
 .footer nav {
   display: flex;
-  justify-content: center;
-  gap: 16px;
+  justify-content: flex-start;
+  gap: 24px;
 }
 
 .footer nav a {
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: none;
   color: var(--gray-1);
   text-decoration: underline;
-  font-size: 10px;
 }
 
-.footer p {
-  margin: 32px 0 0;
-  color: var(--gray-4);
-  letter-spacing: 0.4px;
-  font-size: 10px;
-}
-
+/* ── Shared typography utilities ── */
 .h1 {
-  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
-  font-weight: 700;
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 500;
   font-size: 24px;
   line-height: 1;
   letter-spacing: 0;
 }
 
 .h2 {
-  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
-  font-weight: 700;
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 500;
   font-size: 20px;
   line-height: 1;
   letter-spacing: 0;
 }
 
 .h3 {
-  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
-  font-weight: 700;
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0.04em;
-}
-
-.h4 {
-  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.6;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.regular {
-  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.6;
-  letter-spacing: 0;
 }
 
 .regular-sm {
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.4;
-  letter-spacing: 0;
-  color: #222;
+  color: var(--gray-1);
+  margin: 0;
 }
 
 .caption {
@@ -271,10 +331,203 @@ body {
   letter-spacing: 0.02em;
 }
 
-.button {
+/* ─────────────────────────────────────────────
+   CASE STUDY PAGE
+───────────────────────────────────────────── */
+
+.cs-page {
+  max-width: 1280px;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-top: 70px;
+  background-color: #ebebeb;
+  --grid-gap: 40px;
+}
+
+/* Top bar (return home link, sits above the first divider) */
+.cs-topbar {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gap);
+  height: 70px;
+  align-items: center;
+}
+
+.cs-return-link {
+  grid-column: 3 / span 2;
+  text-align: right;
   font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
-  font-weight: 400;
+  font-size: 10px;
+  line-height: 2;
+  color: #000;
+  text-decoration: none;
+}
+
+/* Two-column layout: sticky nav (cols 3–4) + article (cols 6–8) */
+.cs-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gap);
+  align-items: start;
+  padding: 32px 0 0;
+}
+
+/* ── Floating nav ── */
+/* Nav is fixed to the viewport.
+   Container is max-width 1280px centered, so col-3 left edge = 50vw - 640px + 220px = 50vw - 420px */
+.cs-nav {
+  grid-column: 3 / span 2;
+  position: fixed;
+  top: 32px;
+  left: calc(50vw - 420px);
+  width: 164px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cs-nav-item {
+  display: block;
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-size: 10px;
+  line-height: 2;
+  text-align: right;
+  color: #000;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-right: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.cs-nav-item.active {
+  border-right-color: #000;
+}
+
+/* ── Scrollable content ── */
+.cs-content {
+  grid-column: 6 / span 3;
+}
+
+.cs-section {
+  padding-bottom: 80px;
+}
+
+/* Context / title area */
+.cs-client {
+  display: block;
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #000;
+  margin: 0 0 12px;
+}
+
+.cs-title {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #000;
+  margin: 0 0 32px;
+}
+
+/* Drop-cap intro paragraph */
+.cs-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 40px;
+}
+
+.cs-dropcap {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-size: 64px;
+  line-height: 1;
+  color: #eb5757;
+  flex-shrink: 0;
+}
+
+.cs-intro-text {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #000;
+  padding-top: 6px;
+}
+
+/* Section labels (FOUNDATIONAL RESEARCH, etc.) */
+.cs-section-label {
+  display: block;
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #4f4f4f;
+  margin: 0 0 48px;
+}
+
+/* Content headings */
+.cs-heading {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-weight: 700;
   font-size: 14px;
   line-height: 1.6;
-  letter-spacing: 0.02em;
+  color: #000;
+  margin: 0 0 16px;
+}
+
+.cs-body {
+  font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #000;
+  margin: 0 0 24px;
+}
+
+.cs-body:last-child {
+  margin-bottom: 0;
+}
+
+.cs-wip {
+  font-style: italic;
+  color: #828282;
+}
+
+/* Image blocks */
+.cs-image-block {
+  width: 100%;
+  height: 320px;
+  background: #f2f2f2;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.cs-image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Pagination bar ── */
+.cs-pagination-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gap);
+  width: 100%;
+}
+
+.cs-pagination-inner {
+  grid-column: 5 / span 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 8px;
+}
+
+.cs-pagination-link {
+  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-size: 10px;
+  color: #333;
+  text-decoration: underline;
 }
