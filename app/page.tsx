@@ -15,10 +15,10 @@ const workItems = [
     href: null,
   },
   {
-    title: "NATIONAL BANKING APP",
+    title: "A BANK FOR THE NEXT GENERATION",
     desc: "A bank-wide digital transformation project for Indonesia's 4th largest bank",
     period: "5 Minute Read",
-    href: null,
+    href: "/work/bni",
   },
   {
     title: "INCREASING THAILAND ROAD SAFETY",

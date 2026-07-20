@@ -44,6 +44,18 @@ const valkyrieB = localFont({
   display: "swap"
 });
 
+const valkyrieACaps = localFont({
+  src: [
+    {
+      path: "../public/fonts/valkyrie-a-caps-bold.otf",
+      weight: "700",
+      style: "normal"
+    }
+  ],
+  variable: "--font-valkyrie-a-caps",
+  display: "swap"
+});
+
 export const metadata: Metadata = {
   title: "Yohanes Sitanggang Portfolio",
   description: "Interaction designer portfolio."
@@ -55,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en" className={`${iaWriterDuospace.variable} ${valkyrieB.variable} ${ibmPlexMono.variable}`}>
+      <html lang="en" className={`${iaWriterDuospace.variable} ${valkyrieB.variable} ${valkyrieACaps.variable} ${ibmPlexMono.variable}`}>
       <body>{children}</body>
     </html>
   );
