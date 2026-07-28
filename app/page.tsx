@@ -5,25 +5,25 @@ const workItems = [
   {
     title: "FROM JAKARTA TO THE WORLD",
     desc: "A local bank navigating rapid digital challenges and rising customer expectations",
-    period: "5 Minute Read",
+    period: "2025-2026 • 5 Minute Read",
     href: "/work/jakarta",
   },
   {
     title: "MALAYSIAN ENERGY COMPANY",
     desc: "Shaping Malaysians future relationship with their energy usage",
-    period: "5 Minute Read",
+    period: "2021 • 5 Minute Read",
     href: null,
   },
   {
     title: "A BANK FOR THE NEXT GENERATION",
     desc: "A bank-wide digital transformation project for Indonesia's 4th largest bank",
-    period: "5 Minute Read",
+    period: "2023-2024 • 5 Minute Read",
     href: "/work/bni",
   },
   {
-    title: "INCREASING THAILAND ROAD SAFETY",
+    title: "INCREASING THAILAND'S ROAD SAFETY",
     desc: "Helping Thailand's motorists, ride safely, and efficiently",
-    period: "5 Minute Read",
+    period: "2021 • 5 Minute Read",
     href: null,
   },
 ];
@@ -56,7 +56,7 @@ export default function Home() {
       <section className="intro-grid">
         <div className="intro-content">
           <p className="bio-text">
-            Hi there! I&apos;m a UX Designer currently working for{" "}
+            I&apos;m a UX Designer currently working for{" "}
             <a
               href="https://www.accenture.com/us-en/services/song-index"
               className="bio-link"
@@ -68,8 +68,11 @@ export default function Home() {
             <br />
             <br />
             For 8+ years, I&apos;ve been designing digital experiences ranging from small startups
-            to enterprise software. I focus my design process on turning complex business
-            requirements into delightful, crafted experiences for users.
+            to enterprise software.
+            <br />
+            <br />
+            I focus my design process on turning complex business requirements into delightful,
+            crafted experiences for users.
           </p>
         </div>
       </section>
@@ -117,14 +120,14 @@ export default function Home() {
       {/* ── Footer ── */}
       <div className="footer-grid">
         <footer className="footer">
-          <p className="footer-credit">
-            {`©2026 MADE WITH FIGMA & CURSOR\n\nYOHANES SITANGGANG IS AN INTERACTION DESIGNER FROM JAKARTA, INDONESIA`}
-          </p>
           <nav>
             <a href="#">EMAIL</a>
             <a href="#">RESUME</a>
             <a href="#">LINKEDIN</a>
           </nav>
+          <p className="footer-credit">
+            © 2026 MADE WITH FIGMA &amp; CURSOR
+          </p>
         </footer>
       </div>
     </main>

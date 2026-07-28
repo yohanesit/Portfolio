@@ -27,9 +27,8 @@ body {
 /* ─────────────────────────────────────────────
    HOME PAGE
    Grid: 12 cols · 80px outer margin · 24px gutter
-   Col width at 1280px = (1280 - 160 - 264) / 12 ≈ 71.33px
-   Col 5 left  = 80 + 4 × (71.33 + 24) = 461px = calc(33.333% + 34.33px)
-   Col 9 left  = 80 + 8 × (71.33 + 24) = 843px = calc(66.667% − 10.33px)
+   Labels: cols 1–5 · Body: cols 6–9 · Empty: 10–12
+   Lines at end of col 5 and end of col 9
 ───────────────────────────────────────────── */
 
 .page {
@@ -38,17 +37,26 @@ body {
   width: 100%;
   margin: 0 auto;
   background-color: var(--bg);
-  /* Two solid 0.5px vertical lines: col 5 start and col 9 start */
+  --grid-cols: 12;
+  --grid-gap: 24px;
+  --grid-margin: 80px;
+  --col-width: calc(
+    (100% - 2 * var(--grid-margin) - (var(--grid-cols) - 1) * var(--grid-gap)) /
+      var(--grid-cols)
+  );
+  /* End of col 5 / end of col 9 */
+  --line-after-5: calc(
+    var(--grid-margin) + 5 * var(--col-width) + 4 * var(--grid-gap)
+  );
+  --line-after-9: calc(
+    var(--grid-margin) + 9 * var(--col-width) + 8 * var(--grid-gap)
+  );
   background-image:
     linear-gradient(var(--gray-5), var(--gray-5)),
     linear-gradient(var(--gray-5), var(--gray-5));
-  background-size: 0.5px 100%;
-  background-position:
-    calc(33.333% + 34.33px) 0,
-    calc(66.667% - 10.33px) 0;
+  background-size: 1px 100%;
+  background-position: var(--line-after-5) 0, var(--line-after-9) 0;
   background-repeat: no-repeat;
-  --grid-gap: 24px;
-  --grid-margin: 80px;
 }
 
 /* ── Page header: clock + @YOHANESIT, above first divider ── */
@@ -61,7 +69,7 @@ body {
 }
 
 .page-header-content {
-  grid-column: 5 / span 4;
+  grid-column: 6 / span 4;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -79,7 +87,7 @@ body {
 }
 
 .clock-tz {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
 }
 
@@ -103,11 +111,21 @@ body {
   text-align: left;
 }
 
-/* ── Full-width horizontal divider ── */
+/* ── Full-width horizontal divider (2px dash, 2px gap) ── */
 .h-divider {
   width: 100vw;
   height: 1px;
-  background: var(--gray-5);
+  border: none;
+  background-color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--gray-5) 0,
+    var(--gray-5) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  background-size: 4px 1px;
+  background-repeat: repeat-x;
   margin-left: calc(-50vw + 50%);
 }
 
@@ -122,11 +140,11 @@ body {
   align-items: start;
 }
 
-/* Left label: cols 1–4, right-aligned */
+/* Left label: cols 1–5, right-aligned with 24px gap before the col-5 line */
 .section-label {
-  grid-column: 1 / span 4;
+  grid-column: 1 / span 5;
   margin: 0;
-  padding: 40px 0;
+  padding: 40px 24px 40px 0;
   text-align: right;
   font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
   font-weight: 500;
@@ -139,11 +157,11 @@ body {
 .section-label.work { color: var(--orange); }
 .section-label.exp  { color: var(--green); }
 
-/* Right content: cols 5–8 */
+/* Body content: cols 6–9 */
 .intro-grid > .intro-content,
 .work-grid > .work-list,
 .experience-grid > .experience-list {
-  grid-column: 5 / span 4;
+  grid-column: 6 / span 4;
   padding: 40px 24px;
   align-self: start;
 }
@@ -152,7 +170,7 @@ body {
 .bio-text {
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4;
   color: var(--gray-1);
   margin: 0;
@@ -195,7 +213,7 @@ body {
 .work-desc {
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4;
   color: var(--gray-1);
   margin: 0 0 16px;
@@ -258,35 +276,174 @@ body {
 }
 
 .footer {
-  grid-column: 5 / span 4;
+  grid-column: 6 / span 4;
   padding: 24px 24px 105px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .footer-credit {
-  font-family: var(--font-ia-writer-duospace), "Courier New", Courier, monospace;
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 1.6;
-  letter-spacing: 0.48px;
+  letter-spacing: 0.4px;
   color: var(--gray-4);
-  margin: 0 0 40px;
+  margin: 0;
   white-space: pre-wrap;
 }
 
 .footer nav {
   display: flex;
   justify-content: flex-start;
-  gap: 24px;
+  gap: 16px;
 }
 
 .footer nav a {
   font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
   font-weight: 400;
-  font-size: 12px;
-  line-height: none;
+  font-size: 10px;
+  line-height: 1;
   color: var(--gray-1);
   text-decoration: underline;
+}
+
+/* ── Home · tablet (700–1023px) ──
+   Label | body | empty · guides ~35% / ~79% · 14px body ── */
+@media (min-width: 700px) and (max-width: 1023px) {
+  .page {
+    --grid-margin: 0px;
+    --grid-gap: 0px;
+    --line-after-5: 34.8%;
+    --line-after-9: 78.9%;
+  }
+
+  .page-header-grid,
+  .intro-grid,
+  .work-grid,
+  .experience-grid,
+  .footer-grid {
+    grid-template-columns: 34.8% 44.1% 1fr;
+    column-gap: 0;
+    padding: 0;
+  }
+
+  .page-header-grid {
+    height: 189px;
+  }
+
+  .page-header-content {
+    grid-column: 2;
+    padding: 16px 24px;
+    gap: 24px;
+  }
+
+  .home-handle {
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .section-label {
+    grid-column: 1;
+    text-align: right;
+    padding: 40px 24px;
+    letter-spacing: 0.04em;
+  }
+
+  .intro-grid > .intro-content,
+  .work-grid > .work-list,
+  .experience-grid > .experience-list {
+    grid-column: 2;
+    padding: 40px 24px;
+  }
+
+  .bio-text,
+  .work-desc {
+    font-size: 14px;
+  }
+
+  .work-title {
+    letter-spacing: -0.32px;
+  }
+
+  .footer {
+    grid-column: 2;
+    padding: 32px 24px 80px;
+  }
+}
+
+/* ── Home · mobile (≤699px) ──
+   Single column between 24px rails; 16px content inset ── */
+@media (max-width: 699px) {
+  .page {
+    --grid-margin: 24px;
+    --grid-gap: 0px;
+    background-position: 24px 0, calc(100% - 24px) 0;
+  }
+
+  .page-header-grid,
+  .intro-grid,
+  .work-grid,
+  .experience-grid,
+  .footer-grid {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--grid-margin);
+  }
+
+  .page-header-grid {
+    height: auto;
+    min-height: 185px;
+  }
+
+  .page-header-content {
+    width: 100%;
+    flex: 1;
+    align-self: stretch;
+    padding: 16px;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .home-handle {
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .section-label {
+    width: 100%;
+    text-align: left;
+    padding: 24px 16px;
+    letter-spacing: 0.04em;
+  }
+
+  .intro-grid > .intro-content,
+  .work-grid > .work-list,
+  .experience-grid > .experience-list {
+    width: 100%;
+    padding: 40px 16px;
+  }
+
+  .intro-grid > .intro-content {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .bio-text,
+  .work-desc {
+    font-size: 14px;
+  }
+
+  .work-title {
+    letter-spacing: -0.32px;
+  }
+
+  .footer {
+    width: 100%;
+    padding: 32px 16px 80px;
+  }
 }
 
 /* ── Shared typography utilities ── */
@@ -317,7 +474,7 @@ body {
 .regular-sm {
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4;
   color: var(--gray-1);
   margin: 0;
@@ -352,7 +509,7 @@ body {
   background-image:
     linear-gradient(var(--gray-5), var(--gray-5)),
     linear-gradient(var(--gray-5), var(--gray-5));
-  background-size: 0.5px 100%;
+  background-size: 1px 100%;
   background-position: var(--line-left) 0, var(--line-right) 0;
   background-repeat: no-repeat;
 }
@@ -621,6 +778,31 @@ body {
   height: auto;
 }
 
+/* ── View Transitions (images) ── */
+::view-transition-group(.morph) {
+  animation-duration: 400ms;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-image-pair(.morph) {
+  animation-name: vt-via-blur;
+}
+
+@keyframes vt-via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
 /* ── Pagination bar ── */
 .cs-pagination-grid {
   display: grid;
@@ -669,4 +851,63 @@ body {
   font-size: 10px;
   letter-spacing: 0.4px;
   color: var(--gray-4);
+}
+
+/* ── Case study · mobile ── */
+@media (max-width: 699px) {
+  .cs-page {
+    --grid-gap: 24px;
+    background-image: none;
+  }
+
+  .cs-topbar {
+    padding: 16px 24px;
+  }
+
+  .cs-layout {
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+  }
+
+  .cs-sidebar-left,
+  .cs-sidebar-right {
+    display: none;
+  }
+
+  .cs-content {
+    width: 100%;
+    padding: 40px 0;
+  }
+
+  .cs-hero {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+
+  .cs-image-block {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+
+  .cs-title {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+
+  .cs-pagination-grid,
+  .cs-footer-grid {
+    padding: 0 24px;
+  }
+
+  .cs-pagination-inner,
+  .cs-footer-grid .footer {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .cs-footer-grid .footer {
+    padding-bottom: 80px;
+  }
 }

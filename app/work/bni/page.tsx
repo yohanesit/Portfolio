@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { TransitionImage } from "../../components/TransitionImage";
 import { CaseStudy } from "../../components/CaseStudy";
 
 const navSections = [
@@ -25,7 +25,7 @@ export default function BniPage() {
         <p className="cs-client">NATIONAL BANK</p>
         <h1 className="cs-title">A BANK FOR THE NEXT GENERATION</h1>
         <div className="cs-hero">
-          <Image
+          <TransitionImage
             src="/images/bni/hero.png"
             alt="Next-generation national banking app hero"
             width={499}
@@ -33,13 +33,13 @@ export default function BniPage() {
             priority
           />
           <div className="cs-hero-awards" aria-hidden="true">
-            <Image
+            <TransitionImage
               src="/images/bni/award-if.png"
               alt=""
               width={42}
               height={22}
             />
-            <Image
+            <TransitionImage
               src="/images/bni/award-webby.png"
               alt=""
               width={37}
@@ -92,7 +92,7 @@ export default function BniPage() {
           </li>
         </ol>
         <div className="cs-image-block">
-          <Image
+          <TransitionImage
             src="/images/bni/vision.png"
             alt="Spending overview mobile screen"
             width={501}
@@ -116,7 +116,7 @@ export default function BniPage() {
           investment tools—all in a single view.
         </p>
         <div className="cs-image-block">
-          <Image
+          <TransitionImage
             src="/images/bni/mental-model.png"
             alt="Past, Present, and Future banking screens"
             width={501}
@@ -135,7 +135,7 @@ export default function BniPage() {
           Design Award 2024 and Webby Award 2025
         </p>
         <div className="cs-image-block">
-          <Image
+          <TransitionImage
             src="/images/bni/results-1.png"
             alt="Spending insights and transaction detail screens"
             width={501}
@@ -143,7 +143,7 @@ export default function BniPage() {
           />
         </div>
         <div className="cs-image-block">
-          <Image
+          <TransitionImage
             src="/images/bni/results-2.png"
             alt="Account balance and financial goals screens"
             width={501}

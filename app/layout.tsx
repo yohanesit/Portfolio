@@ -21,7 +21,7 @@ const iaWriterDuospace = localFont({
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
-  weight: ["400", "500"],
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
   variable: "--font-ibm-plex-mono",
   display: "swap",

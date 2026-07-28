@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { TransitionImage } from "../../components/TransitionImage";
 import { CaseStudy } from "../../components/CaseStudy";
 
 const navSections = [
@@ -26,7 +26,7 @@ export default function JakartaPage() {
         <p className="cs-client">REGIONAL BANK</p>
         <h1 className="cs-title">FROM JAKARTA TO THE WORLD</h1>
         <div className="cs-hero">
-          <Image
+          <TransitionImage
             src="/images/jakarta/hero.png"
             alt="VELLO mobile banking app hero"
             width={501}
@@ -61,7 +61,7 @@ export default function JakartaPage() {
           they often go out immediately to users&apos; primary / preferred banks.
         </p>
         <div className="cs-image-block">
-          <Image
+          <TransitionImage
             src="/images/jakarta/research.png"
             alt="User journey research diagram"
             width={501}
@@ -100,7 +100,7 @@ export default function JakartaPage() {
           smoothness, and forward momentum in every transaction.
         </p>
         <div className="cs-image-block">
-          <Image
+          <TransitionImage
             src="/images/jakarta/branding.png"
             alt="VELLO app screen explorations"
             width={501}
@@ -125,7 +125,7 @@ export default function JakartaPage() {
 
       <section id="visual" className="cs-section">
         <div className="cs-image-block">
-          <Image
+          <TransitionImage
             src="/images/jakarta/visual.png"
             alt="Brand visual exploration mockups"
             width={501}

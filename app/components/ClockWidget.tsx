@@ -16,6 +16,7 @@ export function ClockWidget() {
         hour12: true,
       })
         .format(now)
+        .replace(/\s/g, "")
         .toUpperCase();
       setTime(formatted);
     };
@@ -27,9 +28,9 @@ export function ClockWidget() {
 
   return (
     <p className="clock">
-      <span className="clock-tz">Local time in JKT</span>
+      <span className="clock-tz">Current time in Jakarta</span>
       <br />
-      <span className="clock-time">{time}</span>
+      <span className="clock-time">{time ? `${time} WIB` : ""}</span>
     </p>
   );
 }
