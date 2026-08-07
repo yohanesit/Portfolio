@@ -671,7 +671,7 @@ body {
   height: 22px;
 }
 
-/* Drop-cap intro — ::first-letter per CSS-Tricks */
+/* Drop-cap intro — ::first-letter, or explicit .cs-dropcap */
 .cs-intro {
   margin: 0 0 12px;
   padding: 16px 48px;
@@ -685,6 +685,7 @@ body {
   margin-bottom: 0;
 }
 
+.cs-dropcap,
 .cs-intro:first-of-type::first-letter {
   float: left;
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
@@ -695,19 +696,6 @@ body {
   padding-right: 8px;
   padding-left: 3px;
   margin-bottom: -0.1em;
-}
-
-@supports (initial-letter: 3) {
-  .cs-intro:first-of-type::first-letter {
-    float: none;
-    initial-letter: 3;
-    initial-letter-align: auto;
-    font-size: inherit;
-    line-height: inherit;
-    padding: 0;
-    margin-right: 0.25em;
-    margin-bottom: 0;
-  }
 }
 
 /* Content headings */
@@ -772,10 +760,85 @@ body {
   margin: 16px 0;
 }
 
+.cs-image-block--spaced {
+  margin: 32px 0;
+}
+
 .cs-image-block img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Captioned figure cards (Jakarta) */
+.cs-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin: 16px 0;
+  padding: 24px 16px;
+  border-radius: 4px;
+}
+
+.cs-figure--gradient {
+  background-image: linear-gradient(
+    123.76deg,
+    #282828 16.45%,
+    #000000 85.79%
+  );
+}
+
+.cs-figure--solid {
+  background: #191919;
+}
+
+.cs-figure--plain {
+  background: transparent;
+  padding: 32px 0;
+}
+
+.cs-figure-media {
+  width: 100%;
+  overflow: hidden;
+}
+
+.cs-figure-media img,
+.cs-workshop-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cs-workshop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+}
+
+.cs-workshop-grid > * {
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.cs-workshop-grid img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.cs-caption {
+  margin: 0;
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--gray-1);
+}
+
+.cs-page--dark .cs-caption {
+  color: #f2f2f2;
 }
 
 /* ── View Transitions (images) ── */
@@ -803,21 +866,26 @@ body {
   }
 }
 
-/* ── Pagination bar ── */
-.cs-pagination-grid {
+/* ── Pagination + footer (same content column as article) ── */
+.cs-bottom-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: var(--grid-gap);
   width: 100%;
 }
 
-.cs-pagination-inner {
+.cs-bottom-inner {
   grid-column: 4 / 10;
   width: calc(100% + var(--grid-gap));
   display: flex;
+  flex-direction: column;
+}
+
+.cs-pagination-inner {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 0;
+  padding: 40px 48px;
 }
 
 .cs-pagination-link {
@@ -835,21 +903,90 @@ body {
   margin-left: auto;
 }
 
-.cs-footer-grid .footer {
-  grid-column: 4 / 10;
-  width: calc(100% + var(--grid-gap));
-  padding-top: 32px;
-  padding-bottom: 105px;
+.cs-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px 48px 105px;
+  text-align: left;
 }
 
 .cs-footer nav {
-  margin-bottom: 24px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+.cs-footer nav a {
+  font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--gray-1);
+  text-decoration: underline;
 }
 
 .cs-footer-credit {
   margin: 0;
   font-size: 10px;
   letter-spacing: 0.4px;
+  color: var(--gray-4);
+}
+
+/* ── Case study · dark (Jakarta / VELLO) ── */
+.cs-page--dark {
+  --cs-fg: #f2f2f2;
+  --cs-fg-muted: #828282;
+  --cs-line: #333333;
+  background-color: #0a0a0a;
+  background-image:
+    linear-gradient(var(--cs-line), var(--cs-line)),
+    linear-gradient(var(--cs-line), var(--cs-line));
+  color: var(--cs-fg);
+}
+
+.cs-page--dark .cs-return-link,
+.cs-page--dark .cs-meta,
+.cs-page--dark .cs-client,
+.cs-page--dark .cs-title,
+.cs-page--dark .cs-intro,
+.cs-page--dark .cs-heading,
+.cs-page--dark .cs-body,
+.cs-page--dark .cs-list,
+.cs-page--dark .cs-pagination-link {
+  color: var(--cs-fg);
+}
+
+.cs-page--dark .cs-nav-item {
+  color: var(--cs-fg-muted);
+}
+
+.cs-page--dark .cs-nav-item.active {
+  color: var(--cs-fg);
+  border-right-color: var(--cs-fg);
+}
+
+.cs-page--dark .cs-dropcap,
+.cs-page--dark .cs-intro:first-of-type::first-letter {
+  color: #eb5757;
+}
+
+.cs-page--dark .h-divider {
+  background-image: linear-gradient(
+    to right,
+    var(--cs-line) 0,
+    var(--cs-line) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+.cs-page--dark .cs-footer nav a {
+  color: var(--cs-fg);
+}
+
+.cs-page--dark .cs-footer-credit,
+.cs-page--dark .footer-credit {
   color: var(--gray-4);
 }
 
@@ -896,18 +1033,22 @@ body {
     font-size: clamp(28px, 8vw, 48px);
   }
 
-  .cs-pagination-grid,
-  .cs-footer-grid {
+  .cs-bottom-grid {
     padding: 0 24px;
   }
 
-  .cs-pagination-inner,
-  .cs-footer-grid .footer {
+  .cs-bottom-inner {
     grid-column: 1 / -1;
     width: 100%;
   }
 
-  .cs-footer-grid .footer {
+  .cs-pagination-inner,
+  .cs-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .cs-footer {
     padding-bottom: 80px;
   }
 }

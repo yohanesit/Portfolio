@@ -20,6 +20,8 @@ type CaseStudyProps = {
   children: ReactNode;
   nextHref?: string | null;
   nextLabel?: string;
+  theme?: "light" | "dark";
+  footerCredit?: string;
 };
 
 function BackArrow() {
@@ -42,9 +44,20 @@ export function CaseStudy({
   children,
   nextHref = null,
   nextLabel = "READ NEXT →",
+  theme = "light",
+  footerCredit = "© 2026 MADE WITH FIGMA & CURSOR",
 }: CaseStudyProps) {
   const [activeSection, setActiveSection] = useState(navSections[0]?.id ?? "");
   const isClickScrolling = useRef(false);
+
+  useEffect(() => {
+    if (theme !== "dark") return;
+    const previous = document.body.style.backgroundColor;
+    document.body.style.backgroundColor = "#0a0a0a";
+    return () => {
+      document.body.style.backgroundColor = previous;
+    };
+  }, [theme]);
 
   useEffect(() => {
     const sectionEls = navSections
@@ -87,7 +100,7 @@ export function CaseStudy({
   };
 
   return (
-    <main className="cs-page">
+    <main className={`cs-page${theme === "dark" ? " cs-page--dark" : ""}`}>
       <div className="cs-topbar">
         <Link href="/" className="cs-return-link">
           <BackArrow />
@@ -131,33 +144,31 @@ export function CaseStudy({
 
       <div className="h-divider" />
 
-      <div className="cs-pagination-grid">
-        <div className="cs-pagination-inner">
-          <Link href="/" className="cs-pagination-link">
-            <BackArrow />
-            BACK HOME
-          </Link>
-          {nextHref ? (
-            <Link href={nextHref} className="cs-pagination-link cs-pagination-link--next">
-              {nextLabel}
+      <div className="cs-bottom-grid">
+        <div className="cs-bottom-inner">
+          <div className="cs-pagination-inner">
+            <Link href="/" className="cs-pagination-link">
+              <BackArrow />
+              BACK HOME
             </Link>
-          ) : (
-            <span className="cs-pagination-link cs-pagination-link--next">{nextLabel}</span>
-          )}
-        </div>
-      </div>
+            {nextHref ? (
+              <Link href={nextHref} className="cs-pagination-link cs-pagination-link--next">
+                {nextLabel}
+              </Link>
+            ) : (
+              <span className="cs-pagination-link cs-pagination-link--next">{nextLabel}</span>
+            )}
+          </div>
 
-      <div className="footer-grid cs-footer-grid">
-        <footer className="footer cs-footer">
-          <nav>
-            <a href="#">EMAIL</a>
-            <a href="#">RESUME</a>
-            <a href="#">LINKEDIN</a>
-          </nav>
-          <p className="footer-credit cs-footer-credit">
-            © 2026 MADE IN WITH FIGMA &amp; CURSOR
-          </p>
-        </footer>
+          <footer className="cs-footer">
+            <nav>
+              <a href="#">EMAIL</a>
+              <a href="#">RESUME</a>
+              <a href="#">LINKEDIN</a>
+            </nav>
+            <p className="footer-credit cs-footer-credit">{footerCredit}</p>
+          </footer>
+        </div>
       </div>
     </main>
   );

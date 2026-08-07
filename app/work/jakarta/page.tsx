@@ -14,6 +14,7 @@ const navSections = [
 export default function JakartaPage() {
   return (
     <CaseStudy
+      theme="dark"
       navSections={navSections}
       meta={{
         season: "WINTER 2023",
@@ -21,6 +22,7 @@ export default function JakartaPage() {
         timeline: "TIMELINE: 8 MONTHS",
       }}
       nextHref="/work/bni"
+      footerCredit={"© 2026 YOHANESIT\nMADE WITH FIGMA & CURSOR"}
     >
       <section id="context" className="cs-section">
         <p className="cs-client">REGIONAL BANK</p>
@@ -29,16 +31,16 @@ export default function JakartaPage() {
           <TransitionImage
             src="/images/jakarta/hero.png"
             alt="VELLO mobile banking app hero"
-            width={501}
-            height={385}
+            width={1000}
+            height={768}
             priority
           />
         </div>
         <p className="cs-intro">
-          Our client, a regional bank in Jakarta, have had strong ties to the
-          governmental sector. As 90% of their user base were Jakarta&apos;s
-          public officials and are mandated to have a payroll account with the
-          bank.
+          <span className="cs-dropcap">O</span>ur client, a regional bank in
+          Jakarta, have had strong ties to the governmental sector. As 90% of
+          their user base were Jakarta&apos;s public officials and are mandated
+          to have a payroll account with the bank.
         </p>
         <p className="cs-intro">
           The bank was facing pressure to stay relevant amid rapid digital
@@ -60,15 +62,18 @@ export default function JakartaPage() {
           receive their salary from the bank. Once their salaries are in,
           they often go out immediately to users&apos; primary / preferred banks.
         </p>
-        <div className="cs-image-block">
-          <TransitionImage
-            src="/images/jakarta/research.png"
-            alt="User journey research diagram"
-            width={501}
-            height={207}
-          />
-        </div>
-        <h2 className="cs-heading">An Agent Of Change</h2>
+        <figure className="cs-figure cs-figure--gradient">
+          <div className="cs-figure-media">
+            <TransitionImage
+              src="/images/jakarta/research.png"
+              alt="Future state journey diagram"
+              width={3456}
+              height={1428}
+            />
+          </div>
+          <figcaption className="cs-caption">FUTURE STATE JOURNEY</figcaption>
+        </figure>
+        <h2 className="cs-heading">An Agent of Change</h2>
         <p className="cs-body">
           Stakeholders and users envisioned a future where{" "}
           <em>JakOne</em> could be a true driver of Jakarta&apos;s digital
@@ -89,24 +94,52 @@ export default function JakartaPage() {
           branding workshop to define what this agent of change could look
           like. With focused discussions on what promises could Bank Jakarta
           provide to everyday Jakartans, and how could they relate with the
-          bank on a daily basis.
-        </p>
-        <p className="cs-body">
-          To meet the fast-paced, ever-evolving needs of Jakarta&apos;s
-          residents, we introduced VELLO—a mobile banking experience that
-          feels less like a tool and more like a financial companion.
-          Friendly and approachable like a familiar greeting, the name
-          &ldquo;VELLO&rdquo; also hints at velocity, representing speed,
+          bank on a daily basis. To meet the fast-paced, ever-evolving needs
+          of Jakarta&apos;s residents, we introduced VELLO—a mobile banking
+          experience that feels less like a tool and more like a financial
+          companion. Friendly and approachable like a familiar greeting, the
+          name &ldquo;VELLO&rdquo; also hints at velocity, representing speed,
           smoothness, and forward momentum in every transaction.
         </p>
-        <div className="cs-image-block">
+        <figure className="cs-figure cs-figure--solid">
+          <div className="cs-workshop-grid">
+            <TransitionImage
+              src="/images/jakarta/workshop-1.jpg"
+              alt="Branding workshop session photo"
+              width={4032}
+              height={3024}
+            />
+            <TransitionImage
+              src="/images/jakarta/workshop-2.jpg"
+              alt="Branding workshop discussion photo"
+              width={4032}
+              height={3024}
+            />
+          </div>
+          <figcaption className="cs-caption">BRANDING WORKSHOP</figcaption>
+        </figure>
+      </section>
+
+      <section id="visual" className="cs-section">
+        <div className="cs-image-block cs-image-block--spaced">
           <TransitionImage
-            src="/images/jakarta/branding.png"
-            alt="VELLO app screen explorations"
-            width={501}
-            height={475}
+            src="/images/jakarta/app-splash.png"
+            alt="VELLO QR payment and loading splash screens"
+            width={1000}
+            height={768}
           />
         </div>
+        <div className="cs-image-block cs-image-block--spaced">
+          <TransitionImage
+            src="/images/jakarta/app-ui.png"
+            alt="VELLO investment tracker and account dashboard"
+            width={1000}
+            height={768}
+          />
+        </div>
+      </section>
+
+      <section id="testing" className="cs-section">
         <h2 className="cs-heading">Results</h2>
         <p className="cs-body">
           Bringing this vision to life, we created a cast of relatable
@@ -121,22 +154,14 @@ export default function JakartaPage() {
           prioritized and previously complex funding products demystified
           for all levels of savviness.
         </p>
-      </section>
-
-      <section id="visual" className="cs-section">
         <div className="cs-image-block">
           <TransitionImage
             src="/images/jakarta/visual.png"
-            alt="Brand visual exploration mockups"
-            width={501}
-            height={342}
+            alt="VELLO brand visual exploration and merchandise"
+            width={2654}
+            height={1812}
           />
         </div>
-      </section>
-
-      <section id="testing" className="cs-section">
-        <h2 className="cs-heading">Jakartans Responses</h2>
-        <p className="cs-body cs-wip">WIP</p>
       </section>
     </CaseStudy>
   );
