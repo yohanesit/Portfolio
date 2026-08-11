@@ -564,7 +564,7 @@ body {
 .cs-nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   width: calc(100% + var(--grid-gap));
 }
 
@@ -646,7 +646,7 @@ body {
 
 .cs-hero {
   position: relative;
-  padding: 48px 0 32px;
+  padding: 32px 0;
 }
 
 .cs-hero > img,
@@ -656,19 +656,25 @@ body {
   height: auto;
 }
 
+.cs-hero .cs-media-frame {
+  margin: 0;
+}
+
 .cs-hero-awards {
   position: absolute;
-  right: 20px;
-  bottom: 40px;
+  right: 28px;
+  bottom: 48px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
+  z-index: 1;
 }
 
 .cs-hero-awards img {
   display: block;
   width: auto;
-  height: 22px;
+  height: 39px;
+  max-width: none;
 }
 
 /* Drop-cap intro — ::first-letter, or explicit .cs-dropcap */
@@ -768,6 +774,31 @@ body {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Framed media (rounded + border) */
+.cs-media-frame {
+  width: 100%;
+  margin: 0;
+  border: 1px solid #f2f2f2;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cs-media-frame--spaced {
+  margin: 24px 0;
+}
+
+.cs-media-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cs-page--dark .cs-media-frame {
+  border-color: #4a4a4a;
+  background: transparent;
 }
 
 /* Captioned figure cards (Jakarta) */
@@ -1027,6 +1058,26 @@ body {
     margin-left: -24px;
     margin-right: -24px;
     width: calc(100% + 48px);
+  }
+
+  .cs-media-frame {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .cs-hero .cs-media-frame {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .cs-hero-awards {
+    right: 16px;
+    bottom: 40px;
   }
 
   .cs-title {

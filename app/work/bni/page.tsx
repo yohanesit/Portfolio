@@ -5,9 +5,10 @@ import { CaseStudy } from "../../components/CaseStudy";
 
 const navSections = [
   { id: "context", label: "CONTEXT" },
-  { id: "vision", label: "THE VISION" },
-  { id: "mental-model", label: "A NEW MENTAL MODEL" },
-  { id: "results", label: "RESULTS" },
+  { id: "research", label: "FOUNDATIONAL RESEARCH" },
+  { id: "branding", label: "BRANDING WORKSHOP" },
+  { id: "visual", label: "VISUAL EXPLORATION" },
+  { id: "testing", label: "TESTING & CONCLUSION" },
 ];
 
 export default function BniPage() {
@@ -16,47 +17,54 @@ export default function BniPage() {
       navSections={navSections}
       meta={{
         season: "WINTER 2023",
-        role: "ROLE: SENIOR UX DESIGNER",
+        role: "ROLE: SENIOR DESIGNER",
         timeline: "TIMELINE: 8 MONTHS",
       }}
       nextHref={null}
+      footerCredit={"© 2026 YOHANESIT\nMADE WITH FIGMA & CURSOR"}
     >
       <section id="context" className="cs-section">
         <p className="cs-client">NATIONAL BANK</p>
         <h1 className="cs-title">A BANK FOR THE NEXT GENERATION</h1>
         <div className="cs-hero">
-          <TransitionImage
-            src="/images/bni/hero.png"
-            alt="Next-generation national banking app hero"
-            width={499}
-            height={392}
-            priority
-          />
+          <div className="cs-media-frame">
+            <TransitionImage
+              src="/images/bni/hero.png"
+              alt="Next-generation national banking app hero"
+              width={2266}
+              height={2160}
+              priority
+            />
+          </div>
           <div className="cs-hero-awards" aria-hidden="true">
             <TransitionImage
               src="/images/bni/award-if.png"
               alt=""
-              width={42}
-              height={22}
+              width={76}
+              height={39}
+              style={{ width: "auto", height: 39 }}
             />
             <TransitionImage
               src="/images/bni/award-webby.png"
               alt=""
-              width={37}
-              height={22}
+              width={66}
+              height={39}
+              style={{ width: "auto", height: 39 }}
             />
           </div>
         </div>
         <p className="cs-intro">
-          Our client is the bank of choice for university and educational
-          ecosystems across Indonesia—woven into the daily lives of students,
-          faculty, and institutions nationwide. Yet despite launching its first
-          mobile banking app in 2016, adoption stayed low and feedback remained
-          underwhelming. The bank needed a new kind of experience, and it needed
-          it fast—one that spoke to the evolving expectations of a younger,
-          mobile-first generation.
+          <span className="cs-dropcap">O</span>ur client is the bank of choice
+          for university and educational ecosystems across Indonesia—woven into
+          the daily lives of students, faculty, and institutions nationwide.
         </p>
         <p className="cs-intro">
+          Yet despite launching its first mobile banking app in 2016, adoption
+          stayed low and feedback remained underwhelming. The bank needed a new
+          kind of experience, and it needed it fast—one that spoke to the
+          evolving expectations of a younger, mobile-first generation.
+          <br />
+          <br />
           To understand where the experience was falling short, we conducted
           open-ended interviews with internal stakeholders and a selection of
           customers, gathering both their honest read on the current app and a
@@ -68,7 +76,7 @@ export default function BniPage() {
         </p>
       </section>
 
-      <section id="vision" className="cs-section">
+      <section id="research" className="cs-section">
         <h2 className="cs-heading">The Vision</h2>
         <p className="cs-body">
           With such a large and loyal user base already in place, we saw this
@@ -91,17 +99,9 @@ export default function BniPage() {
             rewarding, helping users reach financial stability over time.
           </li>
         </ol>
-        <div className="cs-image-block">
-          <TransitionImage
-            src="/images/bni/vision.png"
-            alt="Spending overview mobile screen"
-            width={501}
-            height={477}
-          />
-        </div>
       </section>
 
-      <section id="mental-model" className="cs-section">
+      <section id="branding" className="cs-section">
         <h2 className="cs-heading">A New Mental Model</h2>
         <p className="cs-body">
           True to our theme of empowering users to take control of their
@@ -109,23 +109,49 @@ export default function BniPage() {
           reframes banking not as a series of tasks, but as a continuous
           relationship with one&apos;s own money:
         </p>
-        <p className="cs-body">
-          Past lets users reflect on their spending habits through clear, honest
-          insights. Present focuses on everyday actions like transfers and
-          payments. Future empowers users to plan ahead with savings and
-          investment tools—all in a single view.
-        </p>
-        <div className="cs-image-block">
+        <ol className="cs-list">
+          <li>
+            Past lets users reflect on their spending habits through clear,
+            honest insights.
+          </li>
+          <li>
+            Present focuses on everyday actions like transfers and payments.
+          </li>
+          <li>
+            Future empowers users to plan ahead with savings and investment
+            tools—all in a single view.
+          </li>
+        </ol>
+        <div className="cs-media-frame cs-media-frame--spaced">
           <TransitionImage
             src="/images/bni/mental-model.png"
             alt="Past, Present, and Future banking screens"
-            width={501}
-            height={308}
+            width={2568}
+            height={1972}
           />
         </div>
       </section>
 
-      <section id="results" className="cs-section">
+      <section id="visual" className="cs-section">
+        <div className="cs-media-frame cs-media-frame--spaced">
+          <TransitionImage
+            src="/images/bni/spending.png"
+            alt="Spending insights and budgeting screens"
+            width={1890}
+            height={1890}
+          />
+        </div>
+        <div className="cs-media-frame cs-media-frame--spaced">
+          <TransitionImage
+            src="/images/bni/goals.png"
+            alt="Investment portfolio and financial goals screens"
+            width={1890}
+            height={1890}
+          />
+        </div>
+      </section>
+
+      <section id="testing" className="cs-section">
         <h2 className="cs-heading">Results</h2>
         <p className="cs-body">
           Our client launched the app on July 5, 2024, and quickly gained
@@ -134,20 +160,12 @@ export default function BniPage() {
           and some more for the future releases. The work was awarded with iF
           Design Award 2024 and Webby Award 2025
         </p>
-        <div className="cs-image-block">
+        <div className="cs-media-frame cs-media-frame--spaced">
           <TransitionImage
-            src="/images/bni/results-1.png"
-            alt="Spending insights and transaction detail screens"
-            width={501}
-            height={501}
-          />
-        </div>
-        <div className="cs-image-block">
-          <TransitionImage
-            src="/images/bni/results-2.png"
-            alt="Account balance and financial goals screens"
-            width={501}
-            height={501}
+            src="/images/bni/collage.png"
+            alt="National banking app screen collage"
+            width={1924}
+            height={1082}
           />
         </div>
       </section>
