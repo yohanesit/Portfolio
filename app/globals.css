@@ -511,6 +511,8 @@ body {
   /* Start of col 3 / start of col 11 — inner edges of the 8-col main band */
   --line-left: calc(2 * var(--col-width) + 2 * var(--grid-gap));
   --line-right: calc(10 * var(--col-width) + 10 * var(--grid-gap));
+  --cs-image-radius: 8px;
+  --cs-image-border: 1px solid rgba(255, 255, 255, 0.1);
   background-image:
     linear-gradient(var(--gray-5), var(--gray-5)),
     linear-gradient(var(--gray-5), var(--gray-5));
@@ -766,10 +768,21 @@ body {
   cursor: default;
 }
 
+/* Image chrome: 8px corners + 1px white 10% stroke */
+.cs-hero > img,
+.cs-hero > span,
+.cs-image-block,
+.cs-media-frame,
+.cs-figure-media,
+.cs-workshop-grid > * {
+  border-radius: var(--cs-image-radius);
+  border: var(--cs-image-border);
+  overflow: hidden;
+}
+
 /* Image blocks */
 .cs-image-block {
   width: 100%;
-  overflow: hidden;
   margin: 16px 0;
 }
 
@@ -783,13 +796,10 @@ body {
   height: auto;
 }
 
-/* Framed media (rounded + border) */
+/* Framed media */
 .cs-media-frame {
   width: 100%;
   margin: 0;
-  border: 1px solid #f2f2f2;
-  border-radius: 8px;
-  overflow: hidden;
   background: #fff;
 }
 
@@ -804,7 +814,6 @@ body {
 }
 
 .cs-page--dark .cs-media-frame {
-  border-color: #4a4a4a;
   background: transparent;
 }
 
@@ -838,7 +847,6 @@ body {
 
 .cs-figure-media {
   width: 100%;
-  overflow: hidden;
 }
 
 .cs-figure-media img,
@@ -857,7 +865,6 @@ body {
 
 .cs-workshop-grid > * {
   min-width: 0;
-  overflow: hidden;
   aspect-ratio: 4 / 3;
 }
 
@@ -1079,9 +1086,6 @@ body {
     margin-left: -24px;
     margin-right: -24px;
     width: calc(100% + 48px);
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
   }
 
   .cs-hero .cs-media-frame {
