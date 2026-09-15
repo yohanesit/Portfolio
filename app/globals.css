@@ -511,8 +511,6 @@ body {
   /* Start of col 3 / start of col 11 — inner edges of the 8-col main band */
   --line-left: calc(2 * var(--col-width) + 2 * var(--grid-gap));
   --line-right: calc(10 * var(--col-width) + 10 * var(--grid-gap));
-  /* One column margin inside the 8-col band (skip col 3 / col 10) */
-  --cs-inner-margin: calc(var(--col-width) + var(--grid-gap));
   background-image:
     linear-gradient(var(--gray-5), var(--gray-5)),
     linear-gradient(var(--gray-5), var(--gray-5));
@@ -618,6 +616,8 @@ body {
   /* Span full distance between vertical guide lines (includes trailing gutter) */
   width: calc(100% + var(--grid-gap));
   max-width: none;
+  /* 1-col inset L/R: (band width = 8*(col+gap)) / 8. 100% is the 8-col grid area. */
+  --cs-inner-margin: calc((100% + var(--grid-gap)) / 8);
   padding: 40px var(--cs-inner-margin) 0;
 }
 
@@ -917,6 +917,7 @@ body {
   width: calc(100% + var(--grid-gap));
   display: flex;
   flex-direction: column;
+  --cs-inner-margin: calc((100% + var(--grid-gap)) / 8);
   padding: 0 var(--cs-inner-margin);
 }
 
@@ -1033,7 +1034,6 @@ body {
 @media (max-width: 699px) {
   .cs-page {
     --grid-gap: 24px;
-    --cs-inner-margin: 0px;
     background-image: none;
   }
 
@@ -1059,6 +1059,7 @@ body {
 
   .cs-content {
     width: 100%;
+    --cs-inner-margin: 0px;
     padding: 40px 0;
   }
 
@@ -1105,6 +1106,7 @@ body {
   .cs-bottom-inner {
     grid-column: 1 / -1;
     width: 100%;
+    --cs-inner-margin: 0px;
   }
 
   .cs-pagination-inner,
