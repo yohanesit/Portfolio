@@ -1036,6 +1036,11 @@ body {
     padding: 16px 24px;
   }
 
+  .cs-return-link {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
   .cs-layout {
     display: flex;
     flex-direction: column;
