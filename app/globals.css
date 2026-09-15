@@ -493,6 +493,7 @@ body {
    Grid: 12 cols · 40px gutter · no outer margin
    Left: cols 1–2 · Content: cols 3–10 · Right: 11–12
    Lines at start of col 3 and start of col 11
+   Inner copy/media inset 1 col + gutter (cols 4–9) inside the 8-col band
 ───────────────────────────────────────────── */
 
 .cs-page {
@@ -510,6 +511,8 @@ body {
   /* Start of col 3 / start of col 11 — inner edges of the 8-col main band */
   --line-left: calc(2 * var(--col-width) + 2 * var(--grid-gap));
   --line-right: calc(10 * var(--col-width) + 10 * var(--grid-gap));
+  /* One column margin inside the 8-col band (skip col 3 / col 10) */
+  --cs-inner-margin: calc(var(--col-width) + var(--grid-gap));
   background-image:
     linear-gradient(var(--gray-5), var(--gray-5)),
     linear-gradient(var(--gray-5), var(--gray-5));
@@ -615,7 +618,7 @@ body {
   /* Span full distance between vertical guide lines (includes trailing gutter) */
   width: calc(100% + var(--grid-gap));
   max-width: none;
-  padding: 40px 0 0;
+  padding: 40px var(--cs-inner-margin) 0;
 }
 
 .cs-section {
@@ -631,7 +634,7 @@ body {
 .cs-client {
   display: block;
   margin: 0 0 12px;
-  padding: 0 48px;
+  padding: 0;
   font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
   font-size: 12px;
   line-height: 1;
@@ -640,7 +643,7 @@ body {
 
 .cs-title {
   margin: 0 0 0;
-  padding: 0 48px;
+  padding: 0;
   font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
   font-weight: 700;
   font-size: 20px;
@@ -684,7 +687,7 @@ body {
 /* Drop-cap intro — ::first-letter, or explicit .cs-dropcap */
 .cs-intro {
   margin: 0 0 12px;
-  padding: 16px 48px;
+  padding: 16px 0;
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
   font-size: 16px;
   line-height: 1.4;
@@ -711,7 +714,7 @@ body {
 /* Content headings */
 .cs-heading {
   margin: 0 0 16px;
-  padding: 0 48px;
+  padding: 0;
   font-family: var(--font-valkyrie-a-caps), Georgia, "Times New Roman", serif;
   font-weight: 700;
   font-size: 18px;
@@ -721,7 +724,7 @@ body {
 
 .cs-body {
   margin: 0 0 16px;
-  padding: 0 48px;
+  padding: 0;
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
   font-weight: 400;
   font-size: 16px;
@@ -735,7 +738,7 @@ body {
 
 .cs-list {
   margin: 0 0 16px;
-  padding: 0 48px 0 calc(48px + 24px);
+  padding: 0 0 0 24px;
   font-family: var(--font-valkyrie-b), Georgia, "Times New Roman", serif;
   font-weight: 400;
   font-size: 16px;
@@ -914,13 +917,14 @@ body {
   width: calc(100% + var(--grid-gap));
   display: flex;
   flex-direction: column;
+  padding: 0 var(--cs-inner-margin);
 }
 
 .cs-pagination-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 48px;
+  padding: 40px 0;
 }
 
 .cs-pagination-link {
@@ -942,7 +946,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 32px 48px 105px;
+  padding: 32px 0 105px;
   text-align: left;
 }
 
@@ -1029,6 +1033,7 @@ body {
 @media (max-width: 699px) {
   .cs-page {
     --grid-gap: 24px;
+    --cs-inner-margin: 0px;
     background-image: none;
   }
 
