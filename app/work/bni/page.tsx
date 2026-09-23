@@ -55,16 +55,15 @@ export default function BniPage() {
         </div>
         <p className="cs-intro">
           <span className="cs-dropcap">O</span>ur client is the bank of choice
-          for university and educational ecosystems across Indonesia—woven into
-          the daily lives of students, faculty, and institutions nationwide.
+          for Indonesia&apos;s universities — woven into the daily lives of
+          students, faculty, and institutions nationwide. But its first mobile
+          app, launched in 2016, never caught on: adoption stayed low and
+          feedback was underwhelming. A younger, mobile-first generation
+          expected more, and the bank needed to answer fast. We opened with
+          candid interviews across staff and customers, and one tension surfaced
+          above the rest:
         </p>
         <p className="cs-intro">
-          Yet despite launching its first mobile banking app in 2016, adoption
-          stayed low and feedback remained underwhelming. The bank needed a new
-          kind of experience, and it needed it fast—one that spoke to the
-          evolving expectations of a younger, mobile-first generation.
-          <br />
-          <br />
           To understand where the experience was falling short, we conducted
           open-ended interviews with internal stakeholders and a selection of
           customers, gathering both their honest read on the current app and a
@@ -74,54 +73,48 @@ export default function BniPage() {
           largely unaware of the many features and services the app already
           offered.
         </p>
+        <aside className="cs-callout">
+          How Might We: give a loyal user base reasons to return — not just
+          reasons to sign up?
+        </aside>
       </section>
 
       <section id="research" className="cs-section">
-        <h2 className="cs-heading">The Vision</h2>
+        <h2 className="cs-heading">Three Principles</h2>
         <p className="cs-body">
-          With such a large and loyal user base already in place, we saw this
-          not merely as a redesign but as an opportunity—a chance to give users
-          as many banking experiences as possible while building healthy
-          financial habits that, in turn, would reward them for coming back. The
-          platform needed to rest on three experience principles:
+          We anchored the redesign on three experience principles:
         </p>
         <ol className="cs-list">
           <li>
-            Empower users to learn financial responsibility by visualizing their
-            actions, encouraging better behaviors and smarter decision-making.
+            Empower — visualize your money so better decisions feel obvious.
           </li>
           <li>
-            Connect people by making it effortless to send and receive funds,
-            and to support one another&apos;s goals and dreams.
+            Connect — make sending, receiving, and supporting others&apos; goals
+            effortless.
           </li>
           <li>
-            Grow savings by simplifying the process and making daily saving more
-            rewarding, helping users reach financial stability over time.
+            Grow — make daily saving simple and rewarding enough to stick.
           </li>
         </ol>
       </section>
 
       <section id="branding" className="cs-section">
+        <aside className="cs-callout">
+          How Might We: Help customers discover everything their app can already
+          do?
+        </aside>
         <h2 className="cs-heading">A New Mental Model</h2>
         <p className="cs-body">
-          True to our theme of empowering users to take control of their
-          finances, we introduced a time-based navigation structure—one that
-          reframes banking not as a series of tasks, but as a continuous
-          relationship with one&apos;s own money:
+          We introduced a time-based navigation structure — banking as a
+          continuous relationship with your money, in a single view:
         </p>
-        <ol className="cs-list">
-          <li>
-            Past lets users reflect on their spending habits through clear,
-            honest insights.
-          </li>
-          <li>
-            Present focuses on everyday actions like transfers and payments.
-          </li>
-          <li>
-            Future empowers users to plan ahead with savings and investment
-            tools—all in a single view.
-          </li>
-        </ol>
+        <p className="cs-body">
+          Past — reflect on spending through clear, honest insights.
+          <br />
+          Present — everyday actions: transfers and payments.
+          <br />
+          Future — plan ahead with savings and investing.
+        </p>
         <div className="cs-media-frame cs-media-frame--spaced">
           <TransitionImage
             src="/images/bni/mental-model.png"
@@ -154,11 +147,10 @@ export default function BniPage() {
       <section id="testing" className="cs-section">
         <h2 className="cs-heading">Results</h2>
         <p className="cs-body">
-          Our client launched the app on July 5, 2024, and quickly gained
-          traction, earning a 4.9-star rating on the App Store. Our design team
-          ended up working on 30+ features with flows for the initial launch,
-          and some more for the future releases. The work was awarded with iF
-          Design Award 2024 and Webby Award 2025
+          The app launched July 5, 2024, with 30+ features shipped for the
+          initial release and more staged for later. It holds a 4.9-star App
+          Store rating and was awarded the iF Design Award 2024 and a Webby
+          Award 2025
         </p>
         <div className="cs-media-frame cs-media-frame--spaced">
           <TransitionImage

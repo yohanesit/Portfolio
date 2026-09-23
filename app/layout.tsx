@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { IBM_Plex_Mono } from "next/font/google";
+import { AgentationDev } from "./AgentationDev";
 import "./globals.css";
 
 const iaWriterDuospace = localFont({
@@ -68,7 +69,10 @@ export default function RootLayout({
 }>) {
   return (
       <html lang="en" className={`${iaWriterDuospace.variable} ${valkyrieB.variable} ${valkyrieACaps.variable} ${ibmPlexMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        {process.env.NODE_ENV === "development" && <AgentationDev />}
+      </body>
     </html>
   );
 }

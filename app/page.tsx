@@ -9,22 +9,16 @@ const workItems = [
     href: "/work/jakarta",
   },
   {
-    title: "MALAYSIAN ENERGY COMPANY",
-    desc: "Shaping Malaysians future relationship with their energy usage",
-    period: "2021 • 5 Minute Read",
-    href: null,
-  },
-  {
     title: "A BANK FOR THE NEXT GENERATION",
     desc: "A bank-wide digital transformation project for Indonesia's 4th largest bank",
     period: "2023-2024 • 5 Minute Read",
     href: "/work/bni",
   },
   {
-    title: "INCREASING THAILAND'S ROAD SAFETY",
-    desc: "Helping Thailand's motorists, ride safely, and efficiently",
-    period: "2021 • 5 Minute Read",
-    href: null,
+    title: "READY FOR THE OPEN SEA",
+    desc: "One intelligent workspace for a shipping company scaling globally",
+    period: "2023 • 8 Months",
+    href: "/work/open-sea",
   },
 ];
 
@@ -81,21 +75,13 @@ export default function Home() {
       <section className="work-grid">
         <p className="section-label work">SELECT WORK</p>
         <div className="work-list">
-          {workItems.map((item) =>
-            item.href ? (
-              <Link href={item.href} key={item.title} className="work-card work-card--link">
-                <p className="work-title">{item.title}</p>
-                <p className="work-desc">{item.desc}</p>
-                <p className="work-meta">{item.period}</p>
-              </Link>
-            ) : (
-              <article className="work-card" key={item.title}>
-                <p className="work-title">{item.title}</p>
-                <p className="work-desc">{item.desc}</p>
-                <p className="work-meta">{item.period}</p>
-              </article>
-            )
-          )}
+          {workItems.map((item) => (
+            <Link href={item.href} key={item.title} className="work-card work-card--link">
+              <p className="work-title">{item.title}</p>
+              <p className="work-desc">{item.desc}</p>
+              <p className="work-meta">{item.period}</p>
+            </Link>
+          ))}
         </div>
       </section>
 
