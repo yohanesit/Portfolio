@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { TransitionImage } from "../../components/TransitionImage";
 import { CaseStudy } from "../../components/CaseStudy";
@@ -42,7 +43,79 @@ const journeys = [
   },
 ] as const;
 
-const roles = ["Strategic", "Non-ops", "Operational"] as const;
+function JourneyTabs() {
+  const [activeId, setActiveId] = useState(journeys[0].id);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const activeIndex = Math.max(
+    0,
+    journeys.findIndex((journey) => journey.id === activeId)
+  );
+  const active = journeys[activeIndex];
+
+  const selectTab = (index: number) => {
+    setActiveId(journeys[index].id);
+    tabRefs.current[index]?.focus();
+  };
+
+  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const last = journeys.length - 1;
+    if (event.key === "ArrowRight") selectTab(index === last ? 0 : index + 1);
+    else if (event.key === "ArrowLeft") selectTab(index === 0 ? last : index - 1);
+    else if (event.key === "Home") selectTab(0);
+    else if (event.key === "End") selectTab(last);
+    else return;
+    event.preventDefault();
+  };
+
+  return (
+    <div className="os-journey os-bleed">
+      <div className="os-roles" role="tablist" aria-label="Role">
+        {journeys.map((journey, index) => {
+          const selected = journey.id === active.id;
+          return (
+            <button
+              key={journey.id}
+              ref={(node) => {
+                tabRefs.current[index] = node;
+              }}
+              type="button"
+              role="tab"
+              id={`journey-tab-${journey.id}`}
+              aria-selected={selected}
+              aria-controls="journey-panel"
+              tabIndex={selected ? 0 : -1}
+              className={`os-role${selected ? " os-role--active" : ""}`}
+              onClick={() => selectTab(index)}
+              onKeyDown={(event) => onTabKeyDown(event, index)}
+            >
+              {journey.active.toUpperCase()}
+            </button>
+          );
+        })}
+      </div>
+      <div
+        key={active.id}
+        id="journey-panel"
+        role="tabpanel"
+        aria-labelledby={`journey-tab-${active.id}`}
+        className="os-journey-panel"
+      >
+        <p className="os-journey-copy">{active.copy}</p>
+        <figure className="cs-figure cs-figure--plain">
+          <div className="cs-media-frame">
+            <TransitionImage
+              src={active.src}
+              alt={active.alt}
+              width={active.width}
+              height={active.height}
+            />
+          </div>
+          <figcaption className="cs-caption">JOURNEY MAP</figcaption>
+        </figure>
+      </div>
+    </div>
+  );
+}
 
 export default function OpenSeaPage() {
   return (
@@ -59,7 +132,9 @@ export default function OpenSeaPage() {
       <section id="context" className="cs-section os-section">
         <p className="cs-client">SHIPPING COMPANY</p>
         <h1 className="cs-title">READY FOR THE OPEN SEA</h1>
-        <div className="os-hero">
+        <div className="cs-hero">
+          <div className="cs-media-frame">
+            <div className="os-hero">
           <Image
             src="/images/open-sea/wallpaper.png"
             alt=""
@@ -97,6 +172,8 @@ export default function OpenSeaPage() {
               />
             </div>
           </div>
+            </div>
+          </div>
         </div>
         <p className="cs-intro">
           <span className="cs-dropcap">P</span>
@@ -132,8 +209,8 @@ export default function OpenSeaPage() {
           planner mid-voyage, they shared one need: to spend less time hunting
           and filing, and more time deciding and doing.
         </p>
-        <figure className="os-figure os-figure--shot">
-          <div className="os-shot">
+        <figure className="cs-figure cs-figure--plain">
+          <div className="cs-media-frame">
             <TransitionImage
               src="/images/open-sea/apps.png"
               alt="Collection of apps across business functions"
@@ -141,7 +218,7 @@ export default function OpenSeaPage() {
               height={905}
             />
           </div>
-          <figcaption className="cs-caption os-caption">
+          <figcaption className="cs-caption">
             COLLECTION OF APPS ACROSS BUSINESS FUNCTIONS
           </figcaption>
         </figure>
@@ -161,8 +238,8 @@ export default function OpenSeaPage() {
           matters, brings the right insight forward, and clears the path to the
           next step.
         </p>
-        <figure className="os-figure">
-          <div className="os-bleed">
+        <figure className="cs-figure cs-figure--plain">
+          <div className="cs-media-frame">
             <TransitionImage
               src="/images/open-sea/exploration.png"
               alt="Early exploration of the interaction model"
@@ -170,26 +247,20 @@ export default function OpenSeaPage() {
               height={2292}
             />
           </div>
-          <figcaption className="cs-caption os-caption">
+          <figcaption className="cs-caption">
             EARLY EXPLORATION OF INTERACTION MODEL
           </figcaption>
         </figure>
-        <figure className="os-figure">
-          <div className="os-bleed os-crop">
+        <figure className="cs-figure cs-figure--plain">
+          <div className="cs-media-frame">
             <TransitionImage
               src="/images/open-sea/wireframe.png"
               alt="Wireframes of the super app"
               width={4096}
               height={1667}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "left center",
-              }}
             />
           </div>
-          <figcaption className="cs-caption os-caption">WIREFRAME</figcaption>
+          <figcaption className="cs-caption">WIREFRAME</figcaption>
         </figure>
       </section>
 
@@ -223,8 +294,8 @@ export default function OpenSeaPage() {
           and launch every application—the direct answer to a workforce
           drowning in apps.
         </p>
-        <figure className="os-figure">
-          <div className="os-bleed">
+        <figure className="cs-figure cs-figure--plain">
+          <div className="cs-media-frame">
             <TransitionImage
               src="/images/open-sea/interaction.png"
               alt="See, Solve, and Simplify interaction model"
@@ -232,7 +303,7 @@ export default function OpenSeaPage() {
               height={2230}
             />
           </div>
-          <figcaption className="cs-caption os-caption">
+          <figcaption className="cs-caption">
             INTERACTION MODEL
           </figcaption>
         </figure>
@@ -245,34 +316,7 @@ export default function OpenSeaPage() {
           spine—and the same five capabilities—instantiated for a very
           different person.
         </p>
-        <div className="os-journeys">
-          {journeys.map((journey) => (
-            <article className="os-journey os-bleed" key={journey.id}>
-              <div className="os-roles" aria-label="Role">
-                {roles.map((role) => (
-                  <span
-                    key={role}
-                    className={`os-role${journey.active === role ? " os-role--active" : ""}`}
-                  >
-                    {role.toUpperCase()}
-                  </span>
-                ))}
-              </div>
-              <p className="os-journey-copy">{journey.copy}</p>
-              <figure className="os-journey-figure">
-                <TransitionImage
-                  src={journey.src}
-                  alt={journey.alt}
-                  width={journey.width}
-                  height={journey.height}
-                />
-                <figcaption className="cs-caption os-caption">
-                  JOURNEY MAP
-                </figcaption>
-              </figure>
-            </article>
-          ))}
-        </div>
+        <JourneyTabs />
       </section>
 
       <section id="results" className="cs-section os-section">

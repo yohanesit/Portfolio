@@ -1288,9 +1288,8 @@ html.vt-lightbox-active::view-transition-group(card) {
 
 .os-hero {
   position: relative;
-  width: calc(100% + 48px);
-  margin: 32px -24px;
-  aspect-ratio: 596 / 439;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -1339,83 +1338,15 @@ html.vt-lightbox-active::view-transition-group(card) {
   object-fit: cover;
 }
 
-.os-figure {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 24px;
-  width: 100%;
-  margin: 24px 0 8px;
-  padding: 0;
-}
-
-.os-figure--shot {
-  gap: 32px;
-}
-
-.os-caption {
-  color: #4f4f4f;
-}
-
-.os-bleed {
-  position: relative;
-  left: -24px;
-  width: calc(100% + 48px);
-}
-
-.os-shot {
-  overflow: hidden;
-  border: 8px solid #fff;
-  border-radius: 4px;
-  background: #fff;
-  box-shadow:
-    0 0 0 1px rgb(0 0 0 / 20%),
-    0 2px 6px rgb(0 0 0 / 10%);
-}
-
-.os-shot .vt-image-button,
-.os-bleed:not(.os-crop) .vt-image-button,
-.os-journey-figure .vt-image-button {
-  width: 100%;
-  height: auto;
-}
-
-.os-shot img,
-.os-bleed:not(.os-crop) img,
-.os-journey-figure img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.os-crop {
-  aspect-ratio: 574 / 509;
-  overflow: hidden;
-}
-
-.os-crop .vt-image-button,
-.os-crop img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left center;
-}
-
 .os-subhead {
   margin-top: 40px;
-}
-
-.os-journeys {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-top: 8px;
 }
 
 .os-journey {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  margin-top: 8px;
   padding: 32px;
   border: 1px solid rgb(0 0 0 / 8%);
   border-radius: 8px;
@@ -1429,17 +1360,51 @@ html.vt-lightbox-active::view-transition-group(card) {
 }
 
 .os-role {
-  padding: 8px;
+  min-height: 32px;
+  padding: 8px 12px;
+  border: 0;
   border-radius: 32px;
+  background: transparent;
+  cursor: pointer;
   font-family: var(--font-ibm-plex-mono), "Courier New", Courier, monospace;
   font-size: 14px;
   line-height: 1.4;
   letter-spacing: 0.04em;
   color: var(--gray-1);
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.os-role:active {
+  transform: scale(0.98);
+}
+
+.os-role:focus-visible {
+  outline: 1px solid var(--gray-1);
+  outline-offset: 2px;
 }
 
 .os-role--active {
   background: rgb(0 0 0 / 5%);
+}
+
+.os-journey-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  animation: os-panel-in 200ms ease-out;
+}
+
+@keyframes os-panel-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.os-journey-panel .cs-figure {
+  margin: 0;
 }
 
 .os-journey-copy {
@@ -1451,29 +1416,20 @@ html.vt-lightbox-active::view-transition-group(card) {
   color: var(--gray-1);
 }
 
-.os-journey-figure {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin: 0;
-}
-
 @media (max-width: 699px) {
-  .os-hero,
-  .os-bleed {
-    left: 0;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .os-hero {
-    margin-top: 32px;
-    margin-bottom: 32px;
-  }
-
   .os-journey {
     padding: 24px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .os-role,
+  .os-role:active {
+    transition: none;
+    transform: none;
+  }
+
+  .os-journey-panel {
+    animation: none;
   }
 }
