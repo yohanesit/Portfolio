@@ -1,24 +1,25 @@
 import Link from "next/link";
 import { ClockWidget } from "./components/ClockWidget";
+import { FooterLinks } from "./components/FooterLinks";
 
 const workItems = [
   {
-    title: "FROM JAKARTA TO THE WORLD",
+    title: "BUILDING AN APP FOR EVERYDAY JAKARTANS",
     desc: "A local bank navigating rapid digital challenges and rising customer expectations",
-    period: "2025-2026 • 5 Minute Read",
+    period: "2025-2026 • UI/UX DESIGN",
     href: "/work/jakarta",
   },
   {
-    title: "A BANK FOR THE NEXT GENERATION",
-    desc: "A bank-wide digital transformation project for Indonesia's 4th largest bank",
-    period: "2023-2024 • 5 Minute Read",
-    href: "/work/bni",
+    title: "READY FOR THE OPEN SEA",
+    desc: "One intelligent workspace for a shipping company preparing to scale globally",
+    period: "2025 • SERVICE DESIGN, UI/UX DESIGN",
+    href: "/work/open-sea",
   },
   {
-    title: "READY FOR THE OPEN SEA",
-    desc: "One intelligent workspace for a shipping company scaling globally",
-    period: "2023 • 8 Months",
-    href: "/work/open-sea",
+    title: "NATIONAL BANKING APP",
+    desc: "A bank-wide digital transformation project for Indonesia's 4th largest bank",
+    period: "2023-2024 • SERVICE DESIGN, UI/UX DESIGN",
+    href: "/work/bni",
   },
 ];
 
@@ -106,11 +107,7 @@ export default function Home() {
       {/* ── Footer ── */}
       <div className="footer-grid">
         <footer className="footer">
-          <nav>
-            <a href="#">EMAIL</a>
-            <a href="#">RESUME</a>
-            <a href="#">LINKEDIN</a>
-          </nav>
+          <FooterLinks />
           <p className="footer-credit">
             © 2026 MADE WITH FIGMA &amp; CURSOR
           </p>

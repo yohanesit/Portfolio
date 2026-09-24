@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { FooterLinks } from "./FooterLinks";
 
 export type CaseStudyNavItem = {
   id: string;
@@ -161,11 +162,7 @@ export function CaseStudy({
           </div>
 
           <footer className="cs-footer">
-            <nav>
-              <a href="#">EMAIL</a>
-              <a href="#">RESUME</a>
-              <a href="#">LINKEDIN</a>
-            </nav>
+            <FooterLinks />
             <p className="footer-credit cs-footer-credit">{footerCredit}</p>
           </footer>
         </div>

@@ -181,14 +181,12 @@ export default function OpenSeaPage() {
           <span className="cs-dropcap">P</span>
           ertamina International Shipping (PIS), operates in one of the most
           demanding sectors there is—hydrocarbon logistics, where decisions
-          carry real operational and financial weight.
-        </p>
-        <p className="cs-intro">
-          As the company set its sights on scaling globally and preparing for
-          an IPO, its people were doing sharper work than their tools allowed.
-          Information sat in a dozen places, action took too many steps, and
-          the day was spent collecting data instead of acting on it. The Super
-          App was our answer: one intelligent workspace, built to change that.
+          carry real operational and financial weight. As the company set its
+          sights on scaling globally and preparing for an IPO, its people were
+          doing sharper work than their tools allowed. Information sat in a
+          dozen places, action took too many steps, and the day was spent
+          collecting data instead of acting on it. The Super App was our
+          answer: one intelligent workspace, built to change that.
         </p>
       </section>
 
