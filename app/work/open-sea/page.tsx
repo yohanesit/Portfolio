@@ -43,8 +43,10 @@ const journeys = [
   },
 ] as const;
 
+type JourneyId = (typeof journeys)[number]["id"];
+
 function JourneyTabs() {
-  const [activeId, setActiveId] = useState(journeys[0].id);
+  const [activeId, setActiveId] = useState<JourneyId>(journeys[0].id);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const activeIndex = Math.max(
     0,
