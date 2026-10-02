@@ -486,7 +486,7 @@ body {
    Grid: 12 cols · 80px outer margin · 24px gutter · stretch
    Left: cols 1–2 · Content: cols 3–10 · Right: 11–12
    Lines at start of col 3 and start of col 11
-   Inner copy/media inset 1 col + gutter (cols 4–9) inside the 8-col band
+   Inner copy/media lands on cols 4–9 (same measure as production’s 6-col column)
 ───────────────────────────────────────────── */
 
 .cs-page {
@@ -633,9 +633,10 @@ body {
   /* Span full distance between vertical guide lines (includes trailing gutter) */
   width: calc(100% + var(--grid-gap));
   max-width: none;
-  /* 1-col inset L/R: (band width = 8*(col+gap)) / 8. 100% is the 8-col grid area. */
+  /* Land on cols 4–9: left = col+gap, right = col+2gap (band includes trailing gutter). */
   --cs-inner-margin: calc((100% + var(--grid-gap)) / 8);
-  padding: 40px var(--cs-inner-margin) 0;
+  --cs-inner-margin-end: calc(var(--cs-inner-margin) + var(--grid-gap));
+  padding: 40px var(--cs-inner-margin-end) 0 var(--cs-inner-margin);
 }
 
 .cs-section {
@@ -1081,7 +1082,8 @@ html.vt-lightbox-active::view-transition-group(card) {
   display: flex;
   flex-direction: column;
   --cs-inner-margin: calc((100% + var(--grid-gap)) / 8);
-  padding: 0 var(--cs-inner-margin);
+  --cs-inner-margin-end: calc(var(--cs-inner-margin) + var(--grid-gap));
+  padding: 0 var(--cs-inner-margin-end) 0 var(--cs-inner-margin);
 }
 
 .cs-pagination-inner {
@@ -1229,6 +1231,7 @@ html.vt-lightbox-active::view-transition-group(card) {
   .cs-content {
     width: 100%;
     --cs-inner-margin: 0px;
+    --cs-inner-margin-end: 0px;
     padding: 40px 0;
   }
 
@@ -1284,6 +1287,7 @@ html.vt-lightbox-active::view-transition-group(card) {
     grid-column: 1 / -1;
     width: 100%;
     --cs-inner-margin: 0px;
+    --cs-inner-margin-end: 0px;
   }
 
   .cs-pagination-inner,
