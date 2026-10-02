@@ -484,8 +484,9 @@ body {
 /* ─────────────────────────────────────────────
    CASE STUDY PAGE
    Grid: 12 cols · 80px outer margin · 24px gutter · stretch
-   Chapters: cols 1–2 · Empty: 3 · Content: 4–9 · Empty: 10 · Meta: 11–12
-   Lines at end of col 2 and start of col 11
+   Left: cols 1–2 · Content: cols 3–10 · Right: 11–12
+   Lines at start of col 3 and start of col 11
+   Inner copy/media inset 1 col + gutter (cols 4–9) inside the 8-col band
 ───────────────────────────────────────────── */
 
 .cs-page {
@@ -502,10 +503,11 @@ body {
     (100% - 2 * var(--grid-margin) - (var(--grid-cols) - 1) * var(--grid-gap)) /
       var(--grid-cols)
   );
-  --cs-media-border: rgb(255 255 255 / 20%);
-  /* End of col 2 · start of col 11 */
+  --cs-image-radius: 8px;
+  --cs-media-border: rgb(255 255 255 / 10%);
+  /* Start of col 3 / start of col 11 — inner edges of the 8-col main band */
   --line-left: calc(
-    var(--grid-margin) + 2 * var(--col-width) + 1 * var(--grid-gap)
+    var(--grid-margin) + 2 * var(--col-width) + 2 * var(--grid-gap)
   );
   --line-right: calc(
     var(--grid-margin) + 10 * var(--col-width) + 10 * var(--grid-gap)
@@ -550,7 +552,7 @@ body {
   transform: scale(0.98);
 }
 
-/* Three-column layout: sticky nav + content + metadata */
+/* 2 | 8 | 2 layout: sticky nav + content + metadata */
 .cs-layout {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -578,7 +580,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 100%;
+  width: calc(100% + var(--grid-gap));
 }
 
 .cs-nav-item {
@@ -627,10 +629,13 @@ body {
 
 /* ── Scrollable content ── */
 .cs-content {
-  grid-column: 4 / 10;
-  width: 100%;
+  grid-column: 3 / 11;
+  /* Span full distance between vertical guide lines (includes trailing gutter) */
+  width: calc(100% + var(--grid-gap));
   max-width: none;
-  padding: 40px 0 0;
+  /* 1-col inset L/R: (band width = 8*(col+gap)) / 8. 100% is the 8-col grid area. */
+  --cs-inner-margin: calc((100% + var(--grid-gap)) / 8);
+  padding: 40px var(--cs-inner-margin) 0;
 }
 
 .cs-section {
@@ -676,6 +681,9 @@ body {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: var(--cs-image-radius);
+  border: 1px solid var(--cs-media-border);
+  overflow: hidden;
 }
 
 .cs-hero .cs-media-frame {
@@ -821,7 +829,7 @@ body {
   overflow: hidden;
   margin: 16px 0;
   border: 1px solid var(--cs-media-border);
-  border-radius: 8px;
+  border-radius: var(--cs-image-radius);
 }
 
 .cs-image-block--spaced {
@@ -839,7 +847,7 @@ body {
   width: 100%;
   margin: 0;
   border: 1px solid var(--cs-media-border);
-  border-radius: 8px;
+  border-radius: var(--cs-image-radius);
   overflow: hidden;
   background: #fff;
 }
@@ -894,7 +902,7 @@ body {
   width: 100%;
   overflow: hidden;
   border: 1px solid var(--cs-media-border);
-  border-radius: 8px;
+  border-radius: var(--cs-image-radius);
 }
 
 .cs-figure-media img,
@@ -917,7 +925,7 @@ body {
   overflow: hidden;
   aspect-ratio: 4 / 3;
   border: 1px solid var(--cs-media-border);
-  border-radius: 8px;
+  border-radius: var(--cs-image-radius);
 }
 
 .cs-workshop-grid img {
@@ -1068,10 +1076,12 @@ html.vt-lightbox-active::view-transition-group(card) {
 }
 
 .cs-bottom-inner {
-  grid-column: 4 / 10;
-  width: 100%;
+  grid-column: 3 / 11;
+  width: calc(100% + var(--grid-gap));
   display: flex;
   flex-direction: column;
+  --cs-inner-margin: calc((100% + var(--grid-gap)) / 8);
+  padding: 0 var(--cs-inner-margin);
 }
 
 .cs-pagination-inner {
@@ -1200,6 +1210,11 @@ html.vt-lightbox-active::view-transition-group(card) {
     padding: 16px 24px;
   }
 
+  .cs-return-link {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
   .cs-layout {
     display: flex;
     flex-direction: column;
@@ -1213,6 +1228,7 @@ html.vt-lightbox-active::view-transition-group(card) {
 
   .cs-content {
     width: 100%;
+    --cs-inner-margin: 0px;
     padding: 40px 0;
   }
 
@@ -1267,6 +1283,7 @@ html.vt-lightbox-active::view-transition-group(card) {
   .cs-bottom-inner {
     grid-column: 1 / -1;
     width: 100%;
+    --cs-inner-margin: 0px;
   }
 
   .cs-pagination-inner,
